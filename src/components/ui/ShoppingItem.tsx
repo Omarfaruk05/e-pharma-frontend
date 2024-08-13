@@ -4,9 +4,12 @@ import Image from "next/image";
 import productImage from "../../assects/product.webp";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
+import VariantDropdown from "./VariantDropdown";
 
 const ShoppingItem = () => {
   const [quanity, setQuantity] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <div className="flex gap-2 md:gap-24 py-4">
@@ -20,25 +23,12 @@ const ShoppingItem = () => {
         <div className="space-y-1">
           <h3 className="text-xl font-semibold">Ceevit</h3>
           <p className="text-green-600">Lorem ipsum dolor sit,</p>
-          <div className="flex gap-3">
-            <button className="w-40 flex justify-between items-center gap-2 py-1 px-2 border rounded-md">
-              <span>Variant</span>
-              <IoIosArrowDown />
-            </button>{" "}
-            <button className="w-32 flex justify-between  items-center py-1 px-2 border rounded-md">
-              <span
-                onClick={() => setQuantity(quanity - 1)}
-                className="text-3xl"
-              >
-                -
-              </span>{" "}
+          <div className="flex gap-3 relative">
+            <VariantDropdown />
+            <button className="w-32 flex justify-between  items-center px-2 border rounded-md">
+              <span onClick={() => setQuantity(quanity - 1)}>-</span>{" "}
               <span>{quanity}</span>{" "}
-              <span
-                onClick={() => setQuantity(quanity + 1)}
-                className="text-2xl"
-              >
-                +
-              </span>
+              <span onClick={() => setQuantity(quanity + 1)}>+</span>
             </button>
           </div>
         </div>
