@@ -1,3 +1,5 @@
+// layout.tsx
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -5,7 +7,7 @@ import Nav from "@/components/ui/Nav";
 import Sidebar from "@/components/ui/Sidebar";
 import MainContainer from "@/components/layout/MainContainer";
 import Footer from "@/components/ui/Footer";
-import MobileNav from "@/components/ui/MobileNav";
+import MobileLayout from "@/components/layout/MobileLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +23,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${inter.className} `}>
         <Nav />
         <MainContainer>
           <div className="flex gap-8 m-4 md:m-8">
-            <div className="hidden lg:block">
+            <div className="hidden lg:block w-60 bg-gray-100 rounded-lg h-fit sticky top-20">
               <Sidebar />
             </div>
             <div>{children}</div>
           </div>
         </MainContainer>
         <Footer />
-        <div className="sticky bottom-0">
-          <MobileNav />
+        <div className="sticky bottom-0 ">
+          <MobileLayout />
         </div>
       </body>
     </html>
