@@ -3,19 +3,29 @@
 import MainContainer from "../layout/MainContainer";
 import { IoBagOutline, IoChevronDown } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
+import Link from "next/link";
+import { useState } from "react";
+import AuthModal from "../Modal/AuthModal";
 
 const Nav = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   const handleSearch = (event: any) => {
     event?.preventDefault();
   };
   return (
-    <div className="bg-sky-400 sticky top-0 z-12">
+    <div className="bg-sky-400 sticky top-0 z-20">
       <MainContainer>
         <div className="p-4 flex flex-col md:flex-row justify-between gap-4 items-center text-white">
           <div className="flex justify-between">
-            <h2 className="text-xl md:text-2xl font-semibold text-center">
+            <Link
+              href={"/"}
+              className="text-xl md:text-2xl font-semibold text-center"
+            >
               E Pharma
-            </h2>
+            </Link>
           </div>
           <div className="">
             <form onSubmit={handleSearch} className="">
@@ -28,7 +38,7 @@ const Nav = () => {
             </div>
             <div className="h-8 w-[3px] rounded-full bg-white"></div>
             <div>
-              <button className="flex items-center gap-2">
+              <button onClick={openModal} className="flex items-center gap-2">
                 <CiUser
                   className="bg-white rounded-full text-sky-400 p-2"
                   size={40}
@@ -36,6 +46,7 @@ const Nav = () => {
                 <span className="font-semibold">Sing In</span>
                 <IoChevronDown size={20} />
               </button>
+              <AuthModal isOpen={isModalOpen} close={closeModal} />
             </div>
           </div>
         </div>

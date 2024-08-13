@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} `}>
+      <body className={inter.className}>
         <Nav />
         <MainContainer>
           <div className="flex gap-8 m-4 md:m-8">
@@ -33,6 +33,7 @@ export default function RootLayout({
             <div>{children}</div>
           </div>
         </MainContainer>
+        <div id="portal-root" />
         <Footer />
         <div className="sticky bottom-0 ">
           <MobileLayout />
