@@ -6,12 +6,16 @@ import { CiUser } from "react-icons/ci";
 import Link from "next/link";
 import { useState } from "react";
 import AuthModal from "../Modal/AuthModal";
+import ShoppingModal from "../Modal/ShoppingModal";
 
 const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isShoppingModalOpen, setShoppingModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+  const openShoppingModal = () => setShoppingModalOpen(true);
+  const closeShoppingModal = () => setShoppingModalOpen(false);
   const handleSearch = (event: any) => {
     event?.preventDefault();
   };
@@ -34,7 +38,15 @@ const Nav = () => {
           </div>
           <div className="hidden md:flex  items-center gap-8">
             <div className="bg-white text-sky-400 p-2 rounded-2xl">
-              <IoBagOutline className="" size={28} />
+              <IoBagOutline
+                onClick={openShoppingModal}
+                className=""
+                size={28}
+              />
+              <ShoppingModal
+                isOpen={isShoppingModalOpen}
+                close={closeShoppingModal}
+              />
             </div>
             <div className="h-8 w-[3px] rounded-full bg-white"></div>
             <div>
