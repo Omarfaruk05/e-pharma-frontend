@@ -5,6 +5,7 @@ import Nav from "@/components/ui/Nav";
 import Sidebar from "@/components/ui/Sidebar";
 import MainContainer from "@/components/layout/MainContainer";
 import Footer from "@/components/ui/Footer";
+import MobileNav from "@/components/ui/MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,9 @@ export default function RootLayout({
           </div>
         </MainContainer>
         <Footer />
+        <div className="sticky bottom-0">
+          <MobileNav />
+        </div>
       </body>
     </html>
   );
