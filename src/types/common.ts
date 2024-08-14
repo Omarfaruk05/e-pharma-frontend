@@ -20,6 +20,16 @@ export type IGenericErrorMessage = {
   message: string;
 };
 
+export type IUser = {
+  _id: string;
+  name: string;
+  email: string;
+  password?: string;
+  role: string;
+  photo: string;
+  isEmailVerified: boolean;
+};
+
 export interface ICategory extends Document {
   _id: string;
   name: string;
@@ -56,6 +66,7 @@ export interface IProduct extends Document {
 }
 
 export interface IOrder extends Document {
+  _id: string;
   userId: string;
   products: {
     product: string;
@@ -63,7 +74,7 @@ export interface IOrder extends Document {
     quantity: number;
     price: number;
   }[];
-  shippingAddress: object | string;
+  shippingAddress: string;
   orderStatus: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
   paymentStatus: "Pending" | "Completed" | "Failed";
   orderDate: string;

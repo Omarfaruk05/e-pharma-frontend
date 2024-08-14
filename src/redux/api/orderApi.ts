@@ -1,3 +1,4 @@
+import { IMeta, IOrder } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
@@ -14,10 +15,17 @@ export const orderApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.order],
     }),
     getOrders: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: ORDER_URL,
         method: "GET",
+        arg,
       }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          orders: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.order],
     }),
     getSingleOrder: build.query({

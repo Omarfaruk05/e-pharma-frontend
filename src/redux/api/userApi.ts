@@ -36,7 +36,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
-    getSingUser: build.query({
+    getSingleUser: build.query({
       query: (id: any) => ({
         url: `${USER_URL}/${id}`,
         method: "GET",
@@ -66,7 +66,7 @@ export const {
   useAddUserMutation,
   useVerifyOTPMutation,
   useLoginMutation,
-  useGetSingUserQuery,
+  useGetSingleUserQuery,
   useGetUsersQuery,
   useDeleteUserMutation,
   useUpdateMyProfileMutation,

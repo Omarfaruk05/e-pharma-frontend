@@ -66,7 +66,7 @@ const ShippingAddressFrom = ({
           shippingAddress,
           paymentStatus: "Pending",
           orderStatus: "Processing",
-          orderDate: Date.now().toString(),
+          orderDate: new Date().toISOString(),
         };
         try {
           const res = await addOrder(data).unwrap();

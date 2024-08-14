@@ -43,18 +43,6 @@ const OTPVerificationForm = ({
     } catch (error: any) {
       toast.error(error);
     }
-    // const data = await FirebaseAuthEmailPasswordCreateUser(
-    //   name,
-    //   email,
-    //   password,
-    //   acceptTerms
-    // );
-
-    // if (data?.user?.email) {
-    //   handleDrawer;
-    //   navigate("/");
-    //   window.location.reload();
-    // }
   };
   return (
     <div>

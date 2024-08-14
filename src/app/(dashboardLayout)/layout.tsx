@@ -7,6 +7,7 @@ import DashboardSidebar from "@/components/ui/DashboardSidebar";
 import Providers from "@/lib/Providers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MainContainer from "@/components/layout/MainContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +32,7 @@ export default function RootLayout({
             <div className="p-3 hidden lg:block w-72 text-white bg-slate-800 h-lvh sticky top-20">
               <DashboardSidebar />
             </div>
-            <div>{children}</div>
+            <MainContainer>{children}</MainContainer>
           </div>
           <div id="portal-root" />
           <div className="sticky bottom-0 ">

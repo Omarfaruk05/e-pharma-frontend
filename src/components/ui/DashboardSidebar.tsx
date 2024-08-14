@@ -27,14 +27,14 @@ const DashboardSidebar = () => {
         <div className=" w-full p-3 space-y-3 ">
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={"/dashboard/user"}
           >
             <CiUser size={20} />
             <span>My Profile</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={"/dashboard/user/orders"}
           >
             <MdOutlineProductionQuantityLimits size={20} />
             <span>My Orders</span>
