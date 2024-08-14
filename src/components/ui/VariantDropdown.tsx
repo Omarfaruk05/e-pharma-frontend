@@ -13,7 +13,7 @@ const VariantDropdown = () => {
       {/* Button */}
       <button
         onClick={toggleDropdown}
-        className="w-40 flex justify-between items-center gap-2 py-1 px-2 border rounded-md"
+        className="w-fit md:w-40 flex justify-between items-center gap-2 py-1 px-2 border rounded-md"
       >
         <span>Variant</span>
         <IoIosArrowDown />
@@ -21,7 +21,7 @@ const VariantDropdown = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 z-20  mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-0 z-20  mt-2 min-w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <a
               href="#"

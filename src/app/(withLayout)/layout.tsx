@@ -1,11 +1,10 @@
-// layout.tsx
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Nav from "@/components/ui/Nav";
 import MobileLayout from "@/components/layout/MobileLayout";
 import DashboardSidebar from "@/components/ui/DashboardSidebar";
+import Providers from "@/lib/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,20 +19,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Nav />
-        <div className="flex gap-8">
-          <div className="p-3 hidden lg:block w-72 text-white bg-slate-800 h-lvh sticky top-20">
-            <DashboardSidebar />
+    <Providers>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className="sticky top-0 z-20">
+            <Nav />
           </div>
-          <div>{children}</div>
-        </div>
-        <div id="portal-root" />
-        <div className="sticky bottom-0 ">
-          <MobileLayout />
-        </div>
-      </body>
-    </html>
+          <div className="flex gap-8">
+            <div className="p-3 hidden lg:block w-72 text-white bg-slate-800 h-lvh sticky top-20">
+              <DashboardSidebar />
+            </div>
+            <div>{children}</div>
+          </div>
+          <div id="portal-root" />
+          <div className="sticky bottom-0 ">
+            <MobileLayout />
+          </div>
+        </body>
+      </html>
+    </Providers>
   );
 }

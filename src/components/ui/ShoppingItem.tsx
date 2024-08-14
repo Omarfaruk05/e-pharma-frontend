@@ -12,7 +12,7 @@ const ShoppingItem = () => {
 
   return (
     <div>
-      <div className="flex gap-2 md:gap-24 py-4">
+      <div className="flex items-center gap-2 md:gap-24 py-4">
         <div>
           <Image
             className="w-full h-20 rounded-xl"
@@ -25,7 +25,7 @@ const ShoppingItem = () => {
           <p className="text-green-600">Lorem ipsum dolor sit,</p>
           <div className="flex gap-3 relative">
             <VariantDropdown />
-            <button className="w-32 flex justify-between  items-center px-2 border rounded-md">
+            <button className="w-20 md:w-32 flex justify-between  items-center px-2 border rounded-md">
               <span onClick={() => setQuantity(quanity - 1)}>-</span>{" "}
               <span>{quanity}</span>{" "}
               <span onClick={() => setQuantity(quanity + 1)}>+</span>
@@ -33,7 +33,7 @@ const ShoppingItem = () => {
           </div>
         </div>
         <p>
-          <h3 className="text-2xl font-semibold">500 TK</h3>
+          <h3 className="md:text-2xl font-semibold">500 TK</h3>
           <p className="line-through">500 TK</p>
         </p>
       </div>

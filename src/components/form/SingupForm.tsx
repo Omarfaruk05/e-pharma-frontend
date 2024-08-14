@@ -2,17 +2,21 @@
 
 import React, { useState } from "react";
 import Input from "./Input";
+import { useRouter } from "next/router";
+import { useAddUserMutation } from "@/redux/api/userApi";
+import { storeUserId } from "@/services/auth.service";
 
-const SingupForm = () => {
+const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const [addUser] = useAddUserMutation();
 
   const handleChange = (event: any) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value } = event.target;
     setFormValues({
       ...formValues,
       [name]: value,
@@ -28,19 +32,18 @@ const SingupForm = () => {
     event.preventDefault();
     const { name, email, password } = formValues;
     console.log(name, email, password);
+    const user = { name, email, password };
 
-    // const data = await FirebaseAuthEmailPasswordCreateUser(
-    //   name,
-    //   email,
-    //   password,
-    //   acceptTerms
-    // );
+    try {
+      const res = await addUser(user).unwrap();
 
-    // if (data?.user?.email) {
-    //   handleDrawer;
-    //   navigate("/");
-    //   window.location.reload();
-    // }
+      if (res?.userId) {
+        await storeUserId({ userId: res?.userId });
+        isSignup();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

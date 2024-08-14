@@ -1,12 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import Input from "./Input";
+import { useLoginMutation } from "@/redux/api/userApi";
+import { storeUserInfo } from "@/services/auth.service";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/redux/slice/userSlice";
 
-const LoginForm = () => {
+const LoginForm = ({ close }: { close: () => void }) => {
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const [login] = useLoginMutation();
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -19,20 +25,19 @@ const LoginForm = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     const { email, password } = formValues;
-    console.log(email, password);
+    const user = { email, password };
 
-    // const data = await FirebaseAuthEmailPasswordCreateUser(
-    //   name,
-    //   email,
-    //   password,
-    //   acceptTerms
-    // );
+    try {
+      const res = await login(user).unwrap();
 
-    // if (data?.user?.email) {
-    //   handleDrawer;
-    //   navigate("/");
-    //   window.location.reload();
-    // }
+      if (res?.accessToken) {
+        await storeUserInfo({ accessToken: res?.accessToken });
+        dispatch(loginSuccess());
+        close();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

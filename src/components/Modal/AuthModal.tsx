@@ -3,9 +3,7 @@ import Portal from "./Protal";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import authImg from "../../assects/Medeasy-website.webp";
 import Image from "next/image";
-import Input from "../form/Input";
 import { useState } from "react";
-import Link from "next/link";
 import SingupForm from "../form/SingupForm";
 import LoginForm from "../form/LoginForm";
 import OTPVerificationForm from "../form/OTPVerificationForm";
@@ -20,6 +18,9 @@ const AuthModal = ({
   if (!isOpen) return null;
   const [login, setLogin] = useState<boolean>(false);
   const [signup, setSignup] = useState<boolean>(false);
+
+  const isSignup = () => setSignup(!signup);
+  const isLogedIn = () => setLogin(!login);
 
   return (
     <Portal>
@@ -43,11 +44,14 @@ const AuthModal = ({
                 <h5 className="text-3xl font-semibold text-center">E Pharma</h5>
               </div>
               {signup ? (
-                <OTPVerificationForm />
+                <OTPVerificationForm
+                  isLogedIn={isLogedIn}
+                  isSignup={isSignup}
+                />
               ) : login ? (
-                <LoginForm />
+                <LoginForm close={close} />
               ) : (
-                <SingupForm />
+                <SingupForm isSignup={isSignup} />
               )}
               <div>
                 {login ? (

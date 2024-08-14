@@ -8,6 +8,7 @@ import Sidebar from "@/components/ui/Sidebar";
 import MainContainer from "@/components/layout/MainContainer";
 import Footer from "@/components/ui/Footer";
 import MobileLayout from "@/components/layout/MobileLayout";
+import Providers from "@/lib/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,23 +23,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Nav />
-        <MainContainer>
-          <div className="flex gap-8 m-4 md:m-8">
-            <div className="hidden lg:block w-60 bg-gray-100 rounded-lg h-fit sticky top-20">
-              <Sidebar />
+    <Providers>
+      <html lang="en">
+        <body className={inter.className}>
+          <Nav />
+          <MainContainer>
+            <div className="flex gap-8 m-4 md:m-8">
+              <div className="hidden lg:block w-60 bg-gray-100 rounded-lg h-fit sticky top-20">
+                <Sidebar />
+              </div>
+              <div>{children}</div>
             </div>
-            <div>{children}</div>
+          </MainContainer>
+          <div id="portal-root" />
+          <Footer />
+          <div className="sticky bottom-0 ">
+            <MobileLayout />
           </div>
-        </MainContainer>
-        <div id="portal-root" />
-        <Footer />
-        <div className="sticky bottom-0 ">
-          <MobileLayout />
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </Providers>
   );
 }

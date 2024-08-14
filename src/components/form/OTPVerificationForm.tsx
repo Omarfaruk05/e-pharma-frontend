@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import Input from "./Input";
+import { useVerifyOTPMutation } from "@/redux/api/userApi";
+import { getUserId, storeUserInfo } from "@/services/auth.service";
 
-const OTPVerificationForm = () => {
+const OTPVerificationForm = ({
+  isLogedIn,
+  isSignup,
+}: {
+  isLogedIn: () => void;
+  isSignup: () => void;
+}) => {
   const [formValues, setFormValues] = useState({
     otp: "",
   });
+
+  const [verifyOTP] = useVerifyOTPMutation();
+
+  const userId = getUserId();
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -17,8 +29,18 @@ const OTPVerificationForm = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     const { otp } = formValues;
-    console.log(otp);
+    otp.toString();
+    const data = { userId, otp };
+    try {
+      const res = await verifyOTP(data).unwrap();
 
+      if (res?._id) {
+        isLogedIn();
+        isSignup();
+      }
+    } catch (error) {
+      console.log(error);
+    }
     // const data = await FirebaseAuthEmailPasswordCreateUser(
     //   name,
     //   email,

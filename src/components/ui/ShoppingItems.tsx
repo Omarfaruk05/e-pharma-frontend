@@ -37,9 +37,11 @@ const ShoppingItems = ({
           ))}
         </div>
       </div>
-      <div className="flex justify-between gap-4 p-4 bg-gray-800 rounded-b-xl text-white">
+      <div className="flex justify-between items-center gap-4 p-4 bg-gray-800 rounded-b-xl text-white">
         <div>
-          <h2 className="text-3xl font-semibold">Are you ready to checkout?</h2>
+          <h2 className="md:text-2xl font-semibold">
+            Are you ready to checkout?
+          </h2>
         </div>
         <div className="flex gap-4 items-center">
           <button
@@ -47,7 +49,7 @@ const ShoppingItems = ({
             className="flex items-center gap-2 bg-sky-500 rounded-lg p-2"
           >
             <IoBagCheckOutline size={24} />
-            Proceed To Checkout
+            Checkout
           </button>
         </div>
       </div>
