@@ -1,7 +1,8 @@
+import { IMeta } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const PRODUCT_URL = "/products";
+const PRODUCT_URL = "/product";
 
 export const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,10 +15,17 @@ export const productApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.product],
     }),
     getProducts: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: PRODUCT_URL,
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          products: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.product],
     }),
     getSingleProduct: build.query({
