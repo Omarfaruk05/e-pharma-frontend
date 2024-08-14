@@ -29,7 +29,7 @@ export default function RootLayout({
           <Nav />
           <MainContainer>
             <div className="flex gap-8 m-4 md:m-8">
-              <div className="hidden lg:block w-60 bg-gray-100 rounded-lg h-fit sticky top-20">
+              <div className="hidden lg:block  bg-gray-100 rounded-lg h-fit md:min-w-40 xl:min-w-60  sticky top-20">
                 <Sidebar />
               </div>
               <div>{children}</div>
