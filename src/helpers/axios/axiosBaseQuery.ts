@@ -2,6 +2,7 @@ import { IMeta } from "@/types";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosRequestConfig, AxiosError } from "axios";
 import { instance as axiosInstance } from "./axiosInstance";
+import { toast } from "react-toastify";
 
 export const axiosBaseQuery =
   (
@@ -30,8 +31,9 @@ export const axiosBaseQuery =
         },
       });
       if (result?.errorMessages) {
-        // message.error(`${result?.errorMessages}`);
+        toast.error(`${result?.errorMessages}`);
       }
+
       return result;
     } catch (axiosError) {
       let err = axiosError as AxiosError;

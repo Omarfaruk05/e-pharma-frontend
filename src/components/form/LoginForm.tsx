@@ -5,6 +5,7 @@ import { useLoginMutation } from "@/redux/api/userApi";
 import { storeUserInfo } from "@/services/auth.service";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/redux/slice/userSlice";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ close }: { close: () => void }) => {
   const [formValues, setFormValues] = useState({
@@ -32,11 +33,12 @@ const LoginForm = ({ close }: { close: () => void }) => {
 
       if (res?.accessToken) {
         await storeUserInfo({ accessToken: res?.accessToken });
+        toast.success("Login successfull.");
         dispatch(loginSuccess());
         close();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error);
     }
   };
   return (

@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useAddShippingAddressMutation } from "@/redux/api/shippingAddressApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
 import { getUserInfo } from "@/services/auth.service";
 import { useAddOrderMutation } from "@/redux/api/orderApi";
+import { toast } from "react-toastify";
+import { removeAllFromCart } from "@/redux/slice/cartSlice";
 
 const ShippingAddressFrom = ({
   close,
@@ -16,6 +18,7 @@ const ShippingAddressFrom = ({
   close: () => void;
   isCheckout: () => void;
 }) => {
+  const dispatch = useDispatch();
   const { _id: userId } = getUserInfo() as any;
   const [formValues, setFormValues] = useState({
     name: "",
@@ -68,11 +71,18 @@ const ShippingAddressFrom = ({
         try {
           const res = await addOrder(data).unwrap();
 
-          console.log(res);
-        } catch (error) {}
+          if (res?._id) {
+            console.log(res);
+            toast.success("Order created successfully!");
+            dispatch(removeAllFromCart());
+            close();
+          }
+        } catch (error: any) {
+          toast.error(error?.errorMessage);
+        }
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error?.errorMessage);
     }
   };
   return (

@@ -9,6 +9,8 @@ import MainContainer from "@/components/layout/MainContainer";
 import Footer from "@/components/ui/Footer";
 import MobileLayout from "@/components/layout/MobileLayout";
 import Providers from "@/lib/Providers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +42,7 @@ export default function RootLayout({
           <div className="sticky bottom-0 ">
             <MobileLayout />
           </div>
+          <ToastContainer />
         </body>
       </html>
     </Providers>

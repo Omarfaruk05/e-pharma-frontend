@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { useVerifyOTPMutation } from "@/redux/api/userApi";
 import { getUserId, storeUserInfo } from "@/services/auth.service";
+import { toast } from "react-toastify";
 
 const OTPVerificationForm = ({
   isLogedIn,
@@ -35,11 +36,12 @@ const OTPVerificationForm = ({
       const res = await verifyOTP(data).unwrap();
 
       if (res?._id) {
+        toast.success("OTP verificaton Successfull.");
         isLogedIn();
         isSignup();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error);
     }
     // const data = await FirebaseAuthEmailPasswordCreateUser(
     //   name,

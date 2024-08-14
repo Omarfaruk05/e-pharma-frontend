@@ -5,6 +5,7 @@ import Input from "./Input";
 import { useRouter } from "next/router";
 import { useAddUserMutation } from "@/redux/api/userApi";
 import { storeUserId } from "@/services/auth.service";
+import { toast } from "react-toastify";
 
 const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
   const [formValues, setFormValues] = useState({
@@ -39,10 +40,11 @@ const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
 
       if (res?.userId) {
         await storeUserId({ userId: res?.userId });
+        toast.success("Signup successfull.");
         isSignup();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error);
     }
   };
   return (
