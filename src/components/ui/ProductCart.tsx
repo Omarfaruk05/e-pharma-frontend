@@ -3,14 +3,40 @@
 import Image from "next/image";
 import productImg from "../../assects/product.webp";
 import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { IProduct } from "@/types";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/redux/slice/cartSlice";
+import ShoppingModal from "../Modal/ShoppingModal";
 
-const ProductCart = ({ product }) => {
+const ProductCart = ({ product }: { product: IProduct }) => {
   const [viewCart, setViewCart] = useState(false);
+  const [isShoppingModalOpen, setShoppingModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const { cart } = useSelector((state: any) => state?.cart);
+
+  const openShoppingModal = () => setShoppingModalOpen(true);
+  const closeShoppingModal = () => setShoppingModalOpen(false);
 
   const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        product,
+        quantity: 1,
+        variantId: product?.variants[0]?._id as string,
+      })
+    );
     setViewCart(true);
   };
+
+  useEffect(() => {
+    const isAlreadyExist = cart.find((x: any) => x._id === product?._id);
+    if (!isAlreadyExist) {
+      setViewCart(false);
+    }
+  });
+
   return (
     <div className="p-4 bg-gray-100 rounded-lg space-y-3">
       <div>
@@ -36,9 +62,18 @@ const ProductCart = ({ product }) => {
       </div>
       <div>
         {viewCart ? (
-          <button className="w-full font-semibold rounded-md bg-cyan-500 px-2 py-1 text-white">
-            View Cart
-          </button>
+          <div>
+            <button
+              onClick={openShoppingModal}
+              className="w-full font-semibold rounded-md bg-cyan-500 px-2 py-1 text-white"
+            >
+              View Cart
+            </button>
+            <ShoppingModal
+              isOpen={isShoppingModalOpen}
+              close={closeShoppingModal}
+            />
+          </div>
         ) : (
           <button
             onClick={handleAddToCart}

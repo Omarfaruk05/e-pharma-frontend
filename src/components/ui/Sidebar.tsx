@@ -13,12 +13,20 @@ const Sidebar = () => {
   }
   return (
     <div className=" w-full p-3 space-y-2 ">
+      <div className="my-4 flex">
+        <Link
+          className="bg-sky-500 text-white p-2 rounded-md w-full"
+          href={"/product"}
+        >
+          All Products
+        </Link>
+      </div>
       {categories &&
         categories.map((category: any, index: any) => (
           <Link
             key={index}
             className="bg-gray-50 rounded-md hover:bg-lime-400 flex p-2 items-center justify-between w-full"
-            href={`/product?primaryId=${category?._id}`}
+            href={{ pathname: "/product", query: { primaryId: category?._id } }}
           >
             <span>{category?.name}</span>{" "}
             <span>

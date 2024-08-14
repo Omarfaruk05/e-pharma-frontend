@@ -1,12 +1,10 @@
-import MainContainer from "@/components/layout/MainContainer";
-import React from "react";
+import Products from "@/components/ui/Products";
 
 const ProductPage = () => {
   return (
-    <MainContainer>
-      <div>htis is product page</div>
-      <div>htis is product page</div>
-    </MainContainer>
+    <div>
+      <Products />
+    </div>
   );
 };
 

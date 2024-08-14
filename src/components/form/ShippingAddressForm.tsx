@@ -3,6 +3,11 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useAddShippingAddressMutation } from "@/redux/api/shippingAddressApi";
+import { useSelector } from "react-redux";
+import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
+import { getUserInfo } from "@/services/auth.service";
+import { useAddOrderMutation } from "@/redux/api/orderApi";
 
 const ShippingAddressFrom = ({
   close,
@@ -11,6 +16,7 @@ const ShippingAddressFrom = ({
   close: () => void;
   isCheckout: () => void;
 }) => {
+  const { _id: userId } = getUserInfo() as any;
   const [formValues, setFormValues] = useState({
     name: "",
     division: "",
@@ -28,24 +34,46 @@ const ShippingAddressFrom = ({
     });
   };
 
+  const [addShippingAddress] = useAddShippingAddressMutation();
+  const [addOrder] = useAddOrderMutation();
+  const { cart } = useSelector((state: any) => state?.cart);
+  const products = cart.map((item: any) => ({
+    product: item._id,
+    variant: item.variantId,
+    quantity: item.quantity,
+    price: Number(
+      calculateAvailablePrice(item.price, item.discount).toFixed(2)
+    ),
+  }));
+
   const handleOrder = async (event: any) => {
     event.preventDefault();
     const { name, division, district, subDistrict, address, phone } =
       formValues;
-    console.log(name, division, district, subDistrict, address, phone);
+    const data = { name, division, district, subDistrict, address, phone };
 
-    // const data = await FirebaseAuthEmailPasswordCreateUser(
-    //   name,
-    //   email,
-    //   password,
-    //   acceptTerms
-    // );
+    try {
+      const res = await addShippingAddress(data).unwrap();
 
-    // if (data?.user?.email) {
-    //   handleDrawer;
-    //   navigate("/");
-    //   window.location.reload();
-    // }
+      if (res?._id) {
+        const shippingAddress = res?._id;
+        const data = {
+          userId,
+          products,
+          shippingAddress,
+          paymentStatus: "Pending",
+          orderStatus: "Processing",
+          orderDate: Date.now().toString(),
+        };
+        try {
+          const res = await addOrder(data).unwrap();
+
+          console.log(res);
+        } catch (error) {}
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="relative bg-sky-400 p-4 rounded-xl">

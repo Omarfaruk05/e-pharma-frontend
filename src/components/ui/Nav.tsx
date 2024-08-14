@@ -8,7 +8,7 @@ import MainContainer from "../layout/MainContainer";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { AUTH_KEY } from "@/constants/storageKey";
 import { loginSuccess, logout } from "@/redux/slice/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthModal from "../Modal/AuthModal";
 import { CiUser } from "react-icons/ci";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,10 @@ const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isShoppingModalOpen, setShoppingModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const router = useRouter();
+
+  const { cart } = useSelector((state: any) => state?.cart);
+  console.log(cart);
 
   const { _id } = getUserInfo() as any;
   const dispatch = useDispatch();
@@ -29,11 +33,13 @@ const Nav = () => {
   const closeModal = () => setModalOpen(false);
   const openShoppingModal = () => setShoppingModalOpen(true);
   const closeShoppingModal = () => setShoppingModalOpen(false);
+
   const handleSearch = (event: any) => {
     event?.preventDefault();
+    const searchText = event.target.search.value;
+    router.push(`/product?searchTerm=${searchText}`);
   };
 
-  const router = useRouter();
   const logOut = () => {
     removeUserInfo(AUTH_KEY);
     dispatch(logout());
@@ -46,7 +52,7 @@ const Nav = () => {
   }
 
   return (
-    <div className="bg-sky-400 sticky top-0">
+    <div className="bg-sky-400 sticky top-0 md:z-20">
       <MainContainer>
         <div className="p-4 flex flex-col md:flex-row justify-between gap-4 items-center text-white">
           <div className="flex justify-between">
@@ -59,12 +65,20 @@ const Nav = () => {
           </div>
           <div className="">
             <form onSubmit={handleSearch} className="">
-              <input className="p-2 text-gray-800 focus:outline-none rounded-md w-96 md:w-60 lg:w-96 md:mx-24" />
+              <input
+                type="text"
+                name="search"
+                id="search"
+                className="p-2 text-gray-800 focus:outline-none rounded-md w-96 md:w-60 lg:w-96 md:mx-24"
+              />
             </form>
           </div>
           <div className="hidden md:flex  items-center gap-8">
-            <div className="bg-white text-sky-400 p-2 rounded-2xl">
+            <div className="relative bg-white text-sky-400 p-2 rounded-2xl">
               <IoBagOutline onClick={openShoppingModal} size={28} />
+              <p className="text-sm text-center font-semibold rounded-full w-5 h-5 text-white bg-red-500 absolute -top-1 -right-1">
+                {cart?.length}
+              </p>
               <ShoppingModal
                 isOpen={isShoppingModalOpen}
                 close={closeShoppingModal}

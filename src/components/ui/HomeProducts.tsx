@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import ProductCart from "./ProductCart";
 import { useGetProductsQuery } from "@/redux/api/productApi";
+import { IProduct } from "@/types";
 
 const HomeProducts = ({
   category,
@@ -15,7 +16,7 @@ const HomeProducts = ({
 
   query["primaryId"] = path;
   const { data, isLoading } = useGetProductsQuery({ ...query });
-  const products = data?.products;
+  const products: IProduct[] = data?.products;
 
   if (isLoading) {
     return <p>Loading...</p>;

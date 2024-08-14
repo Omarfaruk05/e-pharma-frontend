@@ -1,7 +1,7 @@
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const ORDER_URL = "/orders";
+const ORDER_URL = "/order";
 
 export const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
