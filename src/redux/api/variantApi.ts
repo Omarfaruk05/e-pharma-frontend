@@ -1,7 +1,8 @@
+import { IMeta } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const VARIANT_URL = "/variants";
+const VARIANT_URL = "/variant";
 
 export const variantApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,10 +15,17 @@ export const variantApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.variant],
     }),
     getVariants: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: VARIANT_URL,
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: any) => {
+        return {
+          variants: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.variant],
     }),
     getSingleVariant: build.query({

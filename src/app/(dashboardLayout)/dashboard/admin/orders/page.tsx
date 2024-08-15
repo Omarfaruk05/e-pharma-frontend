@@ -6,17 +6,9 @@ import { IOrder } from "@/types";
 import React from "react";
 
 const AllOrdersPage = () => {
-  const query: Record<string, any> = {};
-
-  const { data, isLoading } = useGetOrdersQuery({ ...query });
-  const orders: IOrder[] = data?.orders;
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
   return (
     <div className="m-4">
-      <OrdersTable orders={orders} />
+      <OrdersTable />
     </div>
   );
 };

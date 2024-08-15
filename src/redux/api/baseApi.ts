@@ -6,7 +6,7 @@ import { getBaseUrl } from "@/helpers/config/envConfig";
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: axiosBaseQuery({
-    baseUrl: "https://e-pharma-backend.vercel.app/api/v1",
+    baseUrl: "http://localhost:5000/api/v1",
   }),
   endpoints: () => ({}),
   tagTypes: tagTypesList,

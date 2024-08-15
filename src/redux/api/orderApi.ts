@@ -18,9 +18,9 @@ export const orderApi = baseApi.injectEndpoints({
       query: (arg: Record<string, any>) => ({
         url: ORDER_URL,
         method: "GET",
-        arg,
+        params: arg,
       }),
-      transformResponse: (response: any, meta: IMeta) => {
+      transformResponse: (response: any) => {
         return {
           orders: response?.data,
           meta: response?.meta,

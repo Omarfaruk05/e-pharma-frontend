@@ -14,10 +14,17 @@ export const shippingAddressApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.shippingAddress],
     }),
     getShippingAddresses: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: SHIPPING_ADDRESS_URL,
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: any) => {
+        return {
+          shippingAddresses: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.shippingAddress],
     }),
     getSingleShippingAddress: build.query({

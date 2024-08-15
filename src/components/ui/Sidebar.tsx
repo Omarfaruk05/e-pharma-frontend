@@ -5,8 +5,11 @@ import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Sidebar = () => {
-  const { data, isLoading: categoryLoading } = useGetCategoriesQuery({});
-  const categories = data?.data;
+  const query: Record<string, any> = {};
+  const { data, isLoading: categoryLoading } = useGetCategoriesQuery({
+    ...query,
+  });
+  const categories = data?.categories;
 
   if (categoryLoading) {
     return <p>Loading...</p>;

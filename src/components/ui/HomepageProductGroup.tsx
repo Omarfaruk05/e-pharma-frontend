@@ -5,8 +5,11 @@ import { useGetCategoriesQuery } from "@/redux/api/categoryApi";
 import { ICategory } from "@/types";
 
 const HomepageProductGroup = () => {
-  const { data, isLoading: categoryLoading } = useGetCategoriesQuery({});
-  const categories: ICategory[] = data?.data.slice(0, 3);
+  const query: Record<string, any> = {};
+  const { data, isLoading: categoryLoading } = useGetCategoriesQuery({
+    ...query,
+  });
+  const categories: ICategory[] = data?.categories.slice(0, 3);
 
   if (categoryLoading) {
     return <p>Loading...</p>;

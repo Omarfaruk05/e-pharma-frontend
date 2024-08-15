@@ -34,7 +34,7 @@ export const userApi = baseApi.injectEndpoints({
       query: (arg: Record<string, any>) => ({
         url: USER_URL,
         method: "GET",
-        arg,
+        params: arg,
       }),
       transformResponse: (response: any, meta: IMeta) => {
         return {

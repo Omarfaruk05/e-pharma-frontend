@@ -14,10 +14,17 @@ export const categoryApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.category],
     }),
     getCategories: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: CATEGORY_URL,
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: any) => {
+        return {
+          categories: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.category],
     }),
     getSingleCategory: build.query({

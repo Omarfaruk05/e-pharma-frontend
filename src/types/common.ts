@@ -20,15 +20,19 @@ export type IGenericErrorMessage = {
   message: string;
 };
 
-export type IUser = {
+export interface IUser {
+  photo: string;
   _id: string;
   name: string;
   email: string;
-  password?: string;
+  password: string;
   role: string;
-  photo: string;
   isEmailVerified: boolean;
-};
+  createdAt: string;
+  updatedAt: string;
+  __v?: number;
+  id?: string;
+}
 
 export interface ICategory extends Document {
   _id: string;
@@ -63,6 +67,19 @@ export interface IProduct extends Document {
   };
   variants: any;
   quantity?: number;
+}
+export interface IShippingAddress {
+  _id: string;
+  division: string;
+  district: string;
+  subDistrict: string;
+  address: string;
+  name: string;
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+  __v?: number;
+  id?: string;
 }
 
 export interface IOrder extends Document {

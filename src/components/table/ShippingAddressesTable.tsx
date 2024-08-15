@@ -3,18 +3,22 @@
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
-import { useGetUsersQuery, useDeleteUserMutation } from "@/redux/api/userApi";
-import { IUser, IMeta } from "@/types";
+import {
+  useGetShippingAddressesQuery,
+  useDeleteShippingAddressMutation,
+} from "@/redux/api/shippingAddressApi";
+import { IMeta, IShippingAddress } from "@/types";
 
-const UsersTable = () => {
+const ShippingAddressesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const query: Record<string, any> = { page: currentPage.toString() };
+  const query: Record<string, any> = {};
 
-  const { data, isLoading } = useGetUsersQuery({ ...query });
-  const users: IUser[] = data?.users;
+  query["page"] = currentPage.toString();
+  const { data, isLoading } = useGetShippingAddressesQuery({ ...query });
+  const shippingAddresses: IShippingAddress[] = data?.shippingAddresses;
   const meta: IMeta = data?.meta;
 
-  const [deleteUser] = useDeleteUserMutation();
+  const [deleteShippingAddress] = useDeleteShippingAddressMutation();
 
   const handlePrevious = () => {
     if (currentPage > 1) {
@@ -28,14 +32,14 @@ const UsersTable = () => {
     }
   };
 
-  const handleDeleteUser = async (id: string) => {
+  const handleDeleteShippingAddress = async (id: string) => {
     try {
-      const res = await deleteUser(id).unwrap();
+      const res = await deleteShippingAddress(id).unwrap();
       if (res?._id) {
-        toast.success("User deleted successfully.");
+        toast.success("Shipping address deleted successfully.");
       }
     } catch (error: any) {
-      toast.error(error.message || "Failed to delete user.");
+      toast.error(error.message || "Failed to delete shipping address.");
     }
   };
 
@@ -49,29 +53,26 @@ const UsersTable = () => {
         <thead className="bg-blue-500 text-white">
           <tr>
             <th className="p-4 border-b">Name</th>
-            <th className="p-4 border-b">Email</th>
-            <th className="p-4 border-b">Role</th>
-            <th className="p-4 border-b">Email Verified</th>
-            <th className="p-4 border-b">Created At</th>
-            <th className="p-4 border-b">Updated At</th>
+            <th className="p-4 border-b">Phone</th>
+            <th className="p-4 border-b">Division</th>
+            <th className="p-4 border-b">District</th>
+            <th className="p-4 border-b">Sub-District</th>
+            <th className="p-4 border-b">Address</th>
             <th className="p-4 border-b">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users?.map((user: IUser) => (
-            <tr key={user._id}>
-              <td className="p-4 border-b">{user.name}</td>
-              <td className="p-4 border-b text-center">{user.email}</td>
-              <td className="p-4 border-b text-center">{user.role}</td>
+          {shippingAddresses?.map((address: IShippingAddress) => (
+            <tr key={address._id}>
+              <td className="p-4 border-b">{address.name}</td>
+              <td className="p-4 border-b text-center">{address.phone}</td>
+              <td className="p-4 border-b text-center">{address.division}</td>
+              <td className="p-4 border-b text-center">{address.district}</td>
               <td className="p-4 border-b text-center">
-                {user.isEmailVerified ? "Yes" : "No"}
+                {address.subDistrict}
               </td>
-              <td className="p-4 border-b text-center">
-                {new Date(user.createdAt).toLocaleDateString()}
-              </td>
-              <td className="p-4 border-b text-center">
-                {new Date(user.updatedAt).toLocaleDateString()}
-              </td>
+              <td className="p-4 border-b text-center">{address.address}</td>
+
               <td className="p-4 border-b text-center">
                 <div className="flex gap-6 items-center justify-center">
                   <ImPencil
@@ -79,7 +80,7 @@ const UsersTable = () => {
                     size={20}
                   />
                   <ImBin
-                    onClick={() => handleDeleteUser(user._id)}
+                    onClick={() => handleDeleteShippingAddress(address._id)}
                     className="text-red-500 cursor-pointer"
                     size={20}
                   />
@@ -118,4 +119,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default ShippingAddressesTable;

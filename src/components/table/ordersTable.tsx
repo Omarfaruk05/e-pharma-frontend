@@ -1,14 +1,53 @@
 "use client";
-import { useDeleteOrderMutation } from "@/redux/api/orderApi";
+import {
+  useDeleteOrderMutation,
+  useGetOrdersQuery,
+} from "@/redux/api/orderApi";
 import { getUserInfo } from "@/services/auth.service";
+import { IOrder } from "@/types";
 import { useEffect, useState } from "react";
 import { ImPencil, ImBin } from "react-icons/im";
 import { toast } from "react-toastify";
 
-const OrdersTable = ({ orders }: any) => {
+const OrdersTable = () => {
+  const query: Record<string, any> = {};
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userId, setUserId] = useState("");
+
   const [userRole, setUserRole] = useState("");
-  const { role } = getUserInfo() as any;
+  const { _id, role } = getUserInfo() as any;
+
+  if (role === "user") {
+    setUserId(_id);
+  }
+
+  query["userId"] = userId;
+  query["page"] = currentPage.toString();
+  const { data, isLoading } = useGetOrdersQuery({ ...query });
+  const orders: IOrder[] = data?.orders;
+  const meta = data?.meta;
+  console.log(meta);
   const [deleteOrder] = useDeleteOrderMutation();
+
+  useEffect(() => {
+    setUserRole(role);
+  }, [userRole]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < Math.ceil(meta.total / meta.limit)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   const handleDeleteOrder = async (id: string) => {
     try {
@@ -21,10 +60,6 @@ const OrdersTable = ({ orders }: any) => {
       toast.error(error);
     }
   };
-
-  useEffect(() => {
-    setUserRole(role);
-  }, [userRole]);
 
   return (
     <div className="w-full overflow-x-auto">
@@ -53,7 +88,7 @@ const OrdersTable = ({ orders }: any) => {
                   </ol>
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {order.shippingAddress.address},
+                  {order?.shippingAddress?.address},
                 </td>
                 <td className="py-2 px-4 border-b text-center bg-yellow-100">
                   {order.orderStatus}
@@ -82,7 +117,31 @@ const OrdersTable = ({ orders }: any) => {
               </tr>
             ))}
         </tbody>
-      </table>
+      </table>{" "}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={handlePrevious}
+          className={`px-4 py-2 bg-sky-400 text-white rounded ${
+            currentPage === 1 && "cursor-not-allowed opacity-50"
+          }`}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {Math.ceil(meta.total / meta.limit)}
+        </span>
+        <button
+          onClick={handleNext}
+          className={`px-4 py-2 bg-sky-400 text-white rounded ${
+            currentPage === Math.ceil(meta.total / meta.limit) &&
+            "cursor-not-allowed opacity-50"
+          }`}
+          disabled={currentPage === Math.ceil(meta.total / meta.limit)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

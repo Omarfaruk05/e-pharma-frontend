@@ -73,7 +73,7 @@ const DashboardSidebar = () => {
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={`/dashboard/${role}/vairants`}
+            href={`/dashboard/${role}/variants`}
           >
             <MdModelTraining size={20} />
             <span>Variants</span>
