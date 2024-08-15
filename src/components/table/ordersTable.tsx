@@ -17,9 +17,11 @@ const OrdersTable = () => {
   const [userRole, setUserRole] = useState("");
   const { _id, role } = getUserInfo() as any;
 
-  if (role === "user") {
-    setUserId(_id);
-  }
+  useEffect(() => {
+    if (role === "user") {
+      setUserId(_id);
+    }
+  }, [userId]);
 
   query["userId"] = userId;
   query["page"] = currentPage.toString();

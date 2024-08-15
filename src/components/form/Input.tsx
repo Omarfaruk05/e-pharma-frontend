@@ -10,7 +10,7 @@ const Input = ({
   name: string;
   id: string;
   placeholder: string;
-  value: string;
+  value?: string;
   onChange: (event: any) => void;
 }) => {
   return (
@@ -22,7 +22,7 @@ const Input = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="p-2 text-gray-800 focus:outline-none rounded-md w-full"
+      className="m-1 border border-gray-200 p-2 text-gray-800 focus:outline-gray-200 rounded-md w-full"
     />
   );
 };

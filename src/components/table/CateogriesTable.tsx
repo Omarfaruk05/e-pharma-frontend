@@ -5,6 +5,7 @@ import {
   useGetCategoriesQuery,
 } from "@/redux/api/categoryApi";
 import { ICategory, IMeta } from "@/types";
+import Image from "next/image";
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
@@ -67,7 +68,9 @@ const CategoriesTable = () => {
               <tr key={category._id}>
                 <td className="py-2 px-4 border-b">{category.name}</td>
                 <td className="py-2 px-4 border-b">
-                  <img
+                  <Image
+                    width={40}
+                    height={50}
                     src={category.thumbnail}
                     alt={category.name}
                     className="h-10 w-10 object-cover mx-auto rounded-lg"
