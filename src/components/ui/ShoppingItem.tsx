@@ -16,17 +16,14 @@ import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const ShoppingItem = ({ product }: { product: IProduct }) => {
-  const [quanity, setQuantity] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
-  const [price, setPrice] = useState(Number);
+  const [price, setPrice] = useState(product.price);
   const [variant, setVariant] = useState(product?.variants[0]._id);
 
-  console.log(price);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPrice(product?.price);
-  }, []);
+    setPrice(product.price);
+  }, [product.price]); // Add product.price as a dependency
 
   const handlePrice = (price: number) => {
     setPrice(price);

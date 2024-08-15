@@ -22,7 +22,7 @@ const Nav = () => {
   const { cart } = useSelector((state: any) => state?.cart);
   console.log(cart);
 
-  const { _id } = getUserInfo() as any;
+  const { _id, role } = getUserInfo() as any;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const Nav = () => {
             <div className="h-8 w-[3px] rounded-full bg-white"></div>
             <div className="flex gap-3">
               {isLoggedIn && (
-                <Link href={"/dashboard/user"}>
+                <Link href={`/dashboard/${role}`}>
                   <CiUser
                     className="bg-white rounded-full text-sky-400 p-2"
                     size={40}

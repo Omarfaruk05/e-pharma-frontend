@@ -35,7 +35,7 @@ const ProductCart = ({ product }: { product: IProduct }) => {
     if (!isAlreadyExist) {
       setViewCart(false);
     }
-  });
+  }, [cart, product._id]); // Add dependencies here
 
   return (
     <div className="p-4 bg-gray-100 rounded-lg space-y-3">
@@ -57,7 +57,7 @@ const ProductCart = ({ product }: { product: IProduct }) => {
         <h3 className="text-xl font-semibold">
           ৳ {calculateAvailablePrice(product?.price, product?.discount)}
         </h3>
-        <p className="text-gray-500  line-through">৳ {product?.price}</p>
+        <p className="text-gray-500 line-through">৳ {product?.price}</p>
         <p className="text-red-500 font-semibold">{product?.discount}% OFF</p>
       </div>
       <div>

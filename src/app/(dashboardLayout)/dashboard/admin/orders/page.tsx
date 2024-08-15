@@ -2,24 +2,23 @@
 
 import OrdersTable from "@/components/table/OrdersTable";
 import { useGetOrdersQuery } from "@/redux/api/orderApi";
-import { getUserInfo } from "@/services/auth.service";
 import { IOrder } from "@/types";
+import React from "react";
 
-const Orders = () => {
+const AllOrdersPage = () => {
   const query: Record<string, any> = {};
-  const { _id } = getUserInfo() as any;
-  query["userId"] = _id;
 
   const { data, isLoading } = useGetOrdersQuery({ ...query });
   const orders: IOrder[] = data?.orders;
+
   if (isLoading) {
-    return <p> Loading...</p>;
+    return <p>Loading...</p>;
   }
   return (
-    <div className="p-4 w-full">
+    <div className="m-4">
       <OrdersTable orders={orders} />
     </div>
   );
 };
 
-export default Orders;
+export default AllOrdersPage;

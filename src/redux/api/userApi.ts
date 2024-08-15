@@ -1,3 +1,4 @@
+import { IMeta } from "@/types";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
@@ -30,10 +31,17 @@ export const userApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.auth],
     }),
     getUsers: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: USER_URL,
         method: "GET",
+        arg,
       }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          users: response?.data,
+          meta: response?.meta,
+        };
+      },
       providesTags: [tagTypes.user],
     }),
     getSingleUser: build.query({

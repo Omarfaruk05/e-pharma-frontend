@@ -22,9 +22,9 @@ const DashboardSidebar = () => {
   }, [role]);
 
   return (
-    <div>
+    <div className="sticky top-20">
       {role === "user" && (
-        <div className=" w-full p-3 space-y-3 ">
+        <div className="w-full p-3 space-y-3 ">
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"/dashboard/user"}
@@ -45,49 +45,49 @@ const DashboardSidebar = () => {
         <div className=" w-full p-3 space-y-3 ">
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={"/dashboard/admin"}
           >
             <CiUser size={20} />
             <span>My Profile</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={"/dashboard/admin/users"}
           >
             <LuUsers2 size={20} />
             <span>All Users</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/orders`}
           >
             <FcShipped size={20} />
             <span>All Orders</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/categories`}
           >
             <BiCategory size={20} />
             <span>Categories</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/vairants`}
           >
             <MdModelTraining size={20} />
             <span>Variants</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/products`}
           >
             <MdOutlineShoppingCart size={20} />
             <span>Products</span>
           </Link>
           <Link
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/shippingAddresses`}
           >
             <FaRegAddressCard size={20} />
             <span>Shipping Address</span>

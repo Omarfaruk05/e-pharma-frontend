@@ -29,10 +29,10 @@ export default function RootLayout({
             <Nav />
           </div>
           <div className="flex gap-8">
-            <div className="p-3 hidden lg:block w-72 text-white bg-slate-800 h-lvh sticky top-20">
+            <div className="p-3 hidden lg:block lg:w-96 text-white bg-slate-800 h-lvh sticky top-20">
               <DashboardSidebar />
             </div>
-            <MainContainer>{children}</MainContainer>
+            <div className="w-full">{children}</div>
           </div>
           <div id="portal-root" />
           <div className="sticky bottom-0 ">

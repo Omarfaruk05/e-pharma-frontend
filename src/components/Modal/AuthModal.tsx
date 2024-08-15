@@ -15,9 +15,9 @@ const AuthModal = ({
   isOpen: boolean;
   close: () => void;
 }) => {
-  if (!isOpen) return null;
   const [login, setLogin] = useState<boolean>(false);
   const [signup, setSignup] = useState<boolean>(false);
+  if (!isOpen) return null;
 
   const isSignup = () => setSignup(!signup);
   const isLogedIn = () => setLogin(!login);
