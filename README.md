@@ -1,4 +1,4 @@
-# Project Name: [E-Pharma]()
+# Project Name: [E-Pharma](https://e-pharma-frontend.vercel.app)
 
 ## E-Pharma is an e-commerce platform for medicine management. The frontend is built using Next.js, React, and Tailwind CSS, integrated with Redux for state management and RTK Query for data fetching. This site is usually used for buying medicine in online. A user cant visit this website and can get the overall idea about medicine. If a user can purchase somthing from this website then he/she has to creat an account and logged in. After logged in user can see the dashboard and other necessary document. Admin and super admin can handle all CRUD operations but admin can't see all admins where superadmin can.
 
@@ -29,7 +29,7 @@ password:123456
 
 ## user
 
-email: emon@gmail.com
+email: halifax980@gmail.com
 password:123456
 
 ## Technology used
@@ -50,7 +50,7 @@ password:123456
 #### step-1
 
 ```
-git clone https://github.com/Omarfaruk05/React-therapy
+git clone https://github.com/Omarfaruk05/e-pharma-frontend
 ```
 
 #### step-2
