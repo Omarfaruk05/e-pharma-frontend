@@ -5,16 +5,9 @@ import ProductCart from "./ProductCart";
 import { useGetProductsQuery } from "@/redux/api/productApi";
 import { IProduct } from "@/types";
 
-const HomeProducts = ({
-  category,
-  path,
-}: {
-  category: string;
-  path: string;
-}) => {
+const HomeProducts = () => {
   const query: Record<string, any> = {};
 
-  query["primaryId"] = path;
   const { data, isLoading } = useGetProductsQuery({ ...query });
   const products: IProduct[] = data?.products;
 
@@ -26,11 +19,8 @@ const HomeProducts = ({
     <div>
       <div className="space-y-3">
         <div className="font-semibold flex justify-between items-center">
-          <h4 className="text-2xl">{category}</h4>
-          <Link
-            className="text-blue-400 underline"
-            href={`/product?primaryId=${path}`}
-          >
+          <h4 className="text-2xl">{"Products"}</h4>
+          <Link className="text-blue-400 underline" href={`/product`}>
             See All
           </Link>
         </div>

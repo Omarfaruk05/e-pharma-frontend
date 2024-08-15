@@ -1,37 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Project Name: [E-Pharma]()
 
-## Getting Started
+## E-Pharma is an e-commerce platform for medicine management. The frontend is built using Next.js, React, and Tailwind CSS, integrated with Redux for state management and RTK Query for data fetching. This site is usually used for buying medicine in online. A user cant visit this website and can get the overall idea about medicine. If a user can purchase somthing from this website then he/she has to creat an account and logged in. After logged in user can see the dashboard and other necessary document. Admin and super admin can handle all CRUD operations but admin can't see all admins where superadmin can.
 
-First, run the development server:
+### For admin:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+email: nktonmoy2230@gmail.com
+password: 123456
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## admin action:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Delete any user expect admin and super_admin
+2. Delete and update all products.
+3. Delete and update all shippingaddress.
+4. Delete and update all oreders.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## super_admin
 
-## Learn More
+email: omarfaruk149518@gmail.com
+password:123456
 
-To learn more about Next.js, take a look at the following resources:
+## Super admin action:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Delete any users
+2. Delete and update all products.
+3. Delete and update all shippingaddress.
+4. Delete and update all oreders.
+5. Super admin can delete admins.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## user
 
-## Deploy on Vercel
+email: emon@gmail.com
+password:123456
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technology used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# e-pharma-frontend
+1. Programming Language: TypeScript
+2. Web Framework: Next.js
+3. Backend: Express.js, Mongoose
+4. Authentication: JWT (JSON Web Tokens)
+5. State Management: Redux, RTK Query, Axios
+6. Email Service: Nodemailer
+7. Styling: Tailwind CSS
+8. Notification: React Toastify
+9. Modal: React Portal
+10. Icons: React Icons

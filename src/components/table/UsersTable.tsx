@@ -76,10 +76,6 @@ const UsersTable = () => {
               </td>
               <td className="p-4 border-b text-center">
                 <div className="flex gap-6 items-center justify-center">
-                  <ImPencil
-                    className="text-blue-400 cursor-pointer"
-                    size={20}
-                  />
                   <ImBin
                     onClick={() => handleDeleteUser(user._id)}
                     className="text-red-500 cursor-pointer"
