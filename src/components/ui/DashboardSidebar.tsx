@@ -108,15 +108,15 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}`}
           >
             <CiUser size={20} />
-            <span>My Profile</span>
+            <span onClick={closeSidebar}>My Profile</span>
           </Link>
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/admins`}
           >
             <RiAdminLine size={20} />
             <span>All Admins</span>
@@ -124,7 +124,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/users`}
           >
             <LuUsers2 size={20} />
             <span>All Users</span>
@@ -132,7 +132,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/orders`}
           >
             <FcShipped size={20} />
             <span>All Orders</span>
@@ -140,7 +140,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/categories`}
           >
             <BiCategory size={20} />
             <span>Categories</span>
@@ -148,7 +148,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/variants`}
           >
             <MdModelTraining size={20} />
             <span>Variants</span>
@@ -156,7 +156,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/products`}
           >
             <MdOutlineShoppingCart size={20} />
             <span>Products</span>
@@ -164,7 +164,7 @@ const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
           <Link
             onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"#"}
+            href={`/dashboard/${role}/shippingAddresses`}
           >
             <FaRegAddressCard size={20} />
             <span>Shipping Address</span>

@@ -6,12 +6,12 @@ import { toast } from "react-toastify";
 import { useGetUsersQuery, useDeleteUserMutation } from "@/redux/api/userApi";
 import { IUser, IMeta } from "@/types";
 
-const UsersTable = () => {
+const UsersTable = ({ role }: { role: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const query: Record<string, any> = {};
 
   query["page"] = currentPage.toString();
-  query["role"] = "user";
+  query["role"] = role;
   const { data, isLoading } = useGetUsersQuery({ ...query });
   const users: IUser[] = data?.users;
   const meta: IMeta = data?.meta;
