@@ -4,7 +4,9 @@ import {
   useDeleteVariantMutation,
   useGetVariantsQuery,
 } from "@/redux/api/variantApi";
+import { getUserInfo } from "@/services/auth.service";
 import { IMeta, IVariant } from "@/types";
+import Link from "next/link";
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
@@ -12,6 +14,7 @@ import { toast } from "react-toastify";
 const VariantsTable = () => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
+  const { role } = getUserInfo() as any;
 
   query["page"] = currentPage.toString();
   const { data, isLoading } = useGetVariantsQuery({ ...query });
@@ -52,36 +55,38 @@ const VariantsTable = () => {
       <table className="w-full border">
         <thead className="bg-blue-500 text-white">
           <tr>
-            <th className="py-2 px-4 border-b">Name</th>
-            <th className="py-2 px-4 border-b">Variant</th>
-            <th className="py-2 px-4 border-b">Price</th>
-            <th className="py-2 px-4 border-b">Quanitiy</th>
-            <th className="py-2 px-4 border-b">Created At</th>
-            <th className="py-2 px-4 border-b">Updated At</th>
-            <th className="py-2 px-4 border-b">Actions</th>
+            <th className="p-4 border-b">Name</th>
+            <th className="p-4 border-b">Variant</th>
+            <th className="p-4 border-b">Price</th>
+            <th className="p-4 border-b">Quanitiy</th>
+            <th className="p-4 border-b">Created At</th>
+            <th className="p-4 border-b">Updated At</th>
+            <th className="p-4 border-b">Actions</th>
           </tr>
         </thead>
         <tbody>
           {variants &&
             variants?.map((variant: any) => (
               <tr key={variant._id}>
-                <td className="py-2 px-4 border-b">{variant.productName}</td>
-                <td className="py-2 px-4 border-b">{variant.variant}</td>
-                <td className="py-2 px-4 border-b">{variant.price}</td>
-                <td className="py-2 px-4 border-b">{variant.quantity}</td>
+                <td className="p-4 border-b">{variant.productName}</td>
+                <td className="p-4 border-b">{variant.variant}</td>
+                <td className="p-4 border-b">{variant.price}</td>
+                <td className="p-4 border-b">{variant.quantity}</td>
 
-                <td className="py-2 px-4 border-b">
+                <td className="p-4 border-b">
                   {new Date(variant.createdAt).toLocaleDateString()}
                 </td>
-                <td className="py-2 px-4 border-b">
+                <td className="p-4 border-b">
                   {new Date(variant.updatedAt).toLocaleDateString()}
                 </td>
-                <td className="py-2 px-4 border-b text-center">
+                <td className="p-4 border-b text-center">
                   <div className="flex gap-6 items-center justify-center">
-                    <ImPencil
-                      className="text-blue-400 cursor-pointer"
-                      size={28}
-                    />
+                    <Link href={`/dashboard/${role}/variants/${variant?._id}`}>
+                      <ImPencil
+                        className="text-blue-400 cursor-pointer"
+                        size={28}
+                      />
+                    </Link>
                     <ImBin
                       onClick={() => handleDeleteVariant(variant?._id)}
                       className="text-red-500 cursor-pointer"

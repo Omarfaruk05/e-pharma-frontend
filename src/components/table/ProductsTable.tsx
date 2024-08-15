@@ -9,10 +9,14 @@ import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from "@/redux/api/productApi";
+import Link from "next/link";
+import { getUserInfo } from "@/services/auth.service";
 
 const ProductsTable = () => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { role } = getUserInfo() as any;
 
   query["page"] = currentPage.toString();
   const { data, isLoading } = useGetProductsQuery({ ...query });
@@ -66,7 +70,7 @@ const ProductsTable = () => {
           {products &&
             products.map((product: any) => (
               <tr key={product._id}>
-                <td className="p-4 border-b">{product.name}</td>
+                <td className="p-4 border-b ">{product.name}</td>
                 <td className="p-4 border-b text-center">{product.price}</td>
                 <td className="p-4 border-b text-center">
                   {product.discount}%
@@ -75,17 +79,19 @@ const ProductsTable = () => {
                   {product.stockStatus ? "In Stock" : "Out of Stock"}
                 </td>
                 <td className="p-4 border-b text-center">
-                  {product.categories.primary.name}
+                  {product.categories?.primary?.name}
                 </td>
 
                 <td className="p-4 border-b text-center">
                   <div className="flex gap-6 items-center justify-center">
-                    <ImPencil
-                      className="text-blue-400 cursor-pointer"
-                      size={28}
-                    />
+                    <Link href={`/dashboard/${role}/products/${product?._id}`}>
+                      <ImPencil
+                        className="text-blue-400 cursor-pointer"
+                        size={28}
+                      />
+                    </Link>
                     <ImBin
-                      onClick={() => handleDeleteProduct(product._id)}
+                      onClick={() => handleDeleteProduct(product?._id)}
                       className="text-red-500 cursor-pointer"
                       size={28}
                     />

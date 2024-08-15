@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from "@/redux/api/categoryApi";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 
-const Sidebar = () => {
+const Sidebar = ({ closeSedebar }: any) => {
   const query: Record<string, any> = {};
   const { data, isLoading: categoryLoading } = useGetCategoriesQuery({
     ...query,
@@ -18,6 +18,7 @@ const Sidebar = () => {
     <div className=" w-full p-3 space-y-2 ">
       <div className="my-4 flex">
         <Link
+          onClick={closeSedebar}
           className="bg-sky-500 text-white p-2 rounded-md w-full"
           href={"/product"}
         >
@@ -27,6 +28,7 @@ const Sidebar = () => {
       {categories &&
         categories.map((category: any, index: any) => (
           <Link
+            onClick={closeSedebar}
             key={index}
             className="bg-gray-50 rounded-md hover:bg-lime-400 flex p-2 items-center justify-between w-full"
             href={{ pathname: "/product", query: { primaryId: category?._id } }}

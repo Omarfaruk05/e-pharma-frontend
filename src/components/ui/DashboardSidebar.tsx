@@ -12,7 +12,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { MdModelTraining, MdOutlineShoppingCart } from "react-icons/md";
 import { getUserInfo } from "@/services/auth.service";
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({ closeSidebar }: { closeSidebar?: () => void }) => {
   const [role, setRole] = useState("");
 
   useEffect(() => {
@@ -22,10 +22,11 @@ const DashboardSidebar = () => {
   }, [role]);
 
   return (
-    <div className="sticky top-20">
+    <div className="sticky top-20 text-white">
       {role === "user" && (
         <div className="w-full p-3 space-y-3 ">
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"/dashboard/user"}
           >
@@ -33,6 +34,7 @@ const DashboardSidebar = () => {
             <span>My Profile</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"/dashboard/user/orders"}
           >
@@ -44,20 +46,23 @@ const DashboardSidebar = () => {
       {role === "admin" && (
         <div className=" w-full p-3 space-y-3 ">
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"/dashboard/admin"}
+            href={`/dashboard/${role}`}
           >
             <CiUser size={20} />
-            <span>My Profile</span>
+            <span onClick={closeSidebar}>My Profile</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
-            href={"/dashboard/admin/users"}
+            href={`/dashboard/${role}/users`}
           >
             <LuUsers2 size={20} />
             <span>All Users</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={`/dashboard/${role}/orders`}
           >
@@ -65,6 +70,7 @@ const DashboardSidebar = () => {
             <span>All Orders</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={`/dashboard/${role}/categories`}
           >
@@ -72,6 +78,7 @@ const DashboardSidebar = () => {
             <span>Categories</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={`/dashboard/${role}/variants`}
           >
@@ -79,6 +86,7 @@ const DashboardSidebar = () => {
             <span>Variants</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={`/dashboard/${role}/products`}
           >
@@ -86,6 +94,7 @@ const DashboardSidebar = () => {
             <span>Products</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={`/dashboard/${role}/shippingAddresses`}
           >
@@ -97,6 +106,7 @@ const DashboardSidebar = () => {
       {role === "super-admin" && (
         <div className=" w-full p-3 space-y-3 ">
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -104,6 +114,7 @@ const DashboardSidebar = () => {
             <span>My Profile</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -111,6 +122,7 @@ const DashboardSidebar = () => {
             <span>All Admins</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -118,6 +130,7 @@ const DashboardSidebar = () => {
             <span>All Users</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -125,6 +138,7 @@ const DashboardSidebar = () => {
             <span>All Orders</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -132,6 +146,7 @@ const DashboardSidebar = () => {
             <span>Categories</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -139,6 +154,7 @@ const DashboardSidebar = () => {
             <span>Variants</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >
@@ -146,6 +162,7 @@ const DashboardSidebar = () => {
             <span>Products</span>
           </Link>
           <Link
+            onClick={closeSidebar}
             className="rounded-md bg-slate-700 hover:bg-sky-400 flex p-2 justify-center items-center gap-4 w-full"
             href={"#"}
           >

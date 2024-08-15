@@ -1,10 +1,11 @@
 import { IoCloseCircleOutline } from "react-icons/io5";
 import Sidebar from "./Sidebar";
+import DashboardSidebar from "./DashboardSidebar";
 
-const HamburgerSidebar = ({ isOpen, closeSidebar }: any) => {
+const DashboardHamburger = ({ isOpen, closeSidebar }: any) => {
   return (
     <div
-      className={`fixed top-0 left-0 h-full bg-white z-50 transform text-black ${
+      className={` fixed top-0 left-0 h-full bg-white  transform text-black ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out w-60`}
     >
@@ -20,11 +21,11 @@ const HamburgerSidebar = ({ isOpen, closeSidebar }: any) => {
         <hr />
         {/* Add your menu items here */}
         <div className="p-4">
-          <Sidebar closeSedebar={closeSidebar} />
+          <DashboardSidebar closeSidebar={closeSidebar} />
         </div>
       </div>
     </div>
   );
 };
 
-export default HamburgerSidebar;
+export default DashboardHamburger;

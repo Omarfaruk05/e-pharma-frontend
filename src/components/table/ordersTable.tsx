@@ -5,6 +5,7 @@ import {
 } from "@/redux/api/orderApi";
 import { getUserInfo } from "@/services/auth.service";
 import { IOrder } from "@/types";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ImPencil, ImBin } from "react-icons/im";
 import { toast } from "react-toastify";
@@ -104,10 +105,13 @@ const OrdersTable = () => {
                 {(userRole === "admin" || userRole === "super-admin") && (
                   <td className="py-2 px-4 border-b text-center">
                     <div className="flex gap-6 items-center justify-center">
-                      <ImPencil
-                        className="text-blue-400 cursor-pointer"
-                        size={28}
-                      />
+                      <Link href={`/dashboard/${role}/orders/${order?._id}`}>
+                        {" "}
+                        <ImPencil
+                          className="text-blue-400 cursor-pointer"
+                          size={28}
+                        />
+                      </Link>
                       <ImBin
                         onClick={() => handleDeleteOrder(order?._id)}
                         className="text-red-500 cursor-pointer"

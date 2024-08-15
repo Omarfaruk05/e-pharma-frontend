@@ -1,11 +1,11 @@
-// components/layout/MobileLayout.js
 "use client";
 
 import React, { useState } from "react";
 import MobileNav from "@/components/ui/MobileNav";
 import HamburgerSidebar from "@/components/ui/HamburgerSidebar";
+import DashboardHamburger from "../ui/DashboardHamburger";
 
-const MobileLayout = () => {
+const MobileLayout = ({ dashboard }: any) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -19,7 +19,14 @@ const MobileLayout = () => {
   return (
     <div>
       <MobileNav toggleSidebar={toggleSidebar} />
-      <HamburgerSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      {dashboard ? (
+        <DashboardHamburger
+          isOpen={isSidebarOpen}
+          closeSidebar={closeSidebar}
+        />
+      ) : (
+        <HamburgerSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      )}
     </div>
   );
 };

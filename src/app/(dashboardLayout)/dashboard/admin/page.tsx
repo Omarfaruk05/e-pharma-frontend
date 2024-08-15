@@ -12,7 +12,11 @@ const AdminPage = () => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  return <MyInfo data={data} />;
+  return (
+    <div className="w-fit md:w-full">
+      <MyInfo data={data} />
+    </div>
+  );
 };
 
 export default AdminPage;

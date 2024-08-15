@@ -24,6 +24,7 @@ const MobileNav = ({ toggleSidebar }: any) => {
   const closeShoppingModal = () => setShoppingModalOpen(false);
 
   const loginResponse = useSelector((state: any) => state?.user);
+  const { cart } = useSelector((state: any) => state?.cart);
   const isLoggedIn = loginResponse?.isLoggedIn;
 
   const router = useRouter();
@@ -34,15 +35,18 @@ const MobileNav = ({ toggleSidebar }: any) => {
   };
 
   return (
-    <div className="flex justify-between items-center p-2 bg-white md:hidden">
+    <div className="fixed bottom-0  w-full flex justify-between items-center p-2 bg-white md:hidden">
       <div onClick={toggleSidebar}>
         <CgMenuLeft size={32} />
       </div>
       <Link href={"/dashboard/user"}>
         <CiUser size={32} />
       </Link>
-      <div>
-        <IoBagOutline onClick={openShoppingModal} size={32} />
+      <div className="relative">
+        <IoBagOutline onClick={openShoppingModal} size={32} />{" "}
+        <p className="text-sm absolute w-5 h-5 rounded-full bg-red-500 text-white top-0 right-0 grid place-items-center">
+          {cart?.length}
+        </p>
         <ShoppingModal
           isOpen={isShoppingModalOpen}
           close={closeShoppingModal}

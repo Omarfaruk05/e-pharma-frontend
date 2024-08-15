@@ -20,7 +20,6 @@ const Nav = () => {
   const router = useRouter();
 
   const { cart } = useSelector((state: any) => state?.cart);
-  console.log(cart);
 
   const { _id, role } = getUserInfo() as any;
   const dispatch = useDispatch();

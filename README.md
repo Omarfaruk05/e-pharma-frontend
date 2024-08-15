@@ -1,4 +1,4 @@
-### Project Name: [E-Pharma]()
+# Project Name: [E-Pharma]()
 
 ## E-Pharma is an e-commerce platform for medicine management. The frontend is built using Next.js, React, and Tailwind CSS, integrated with Redux for state management and RTK Query for data fetching. This site is usually used for buying medicine in online. A user cant visit this website and can get the overall idea about medicine. If a user can purchase somthing from this website then he/she has to creat an account and logged in. After logged in user can see the dashboard and other necessary document. Admin and super admin can handle all CRUD operations but admin can't see all admins where superadmin can.
 
@@ -44,3 +44,29 @@ password:123456
 8. Notification: React Toastify
 9. Modal: React Portal
 10. Icons: React Icons
+
+## Follow this steps to install the project in your local computer.
+
+#### step-1
+
+```
+git clone https://github.com/Omarfaruk05/React-therapy
+```
+
+#### step-2
+
+```
+cd e-pharma-frontend
+```
+
+#### step-3
+
+```
+yarn
+```
+
+#### step-4
+
+```
+yarn dev
+```

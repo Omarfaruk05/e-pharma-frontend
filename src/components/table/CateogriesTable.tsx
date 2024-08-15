@@ -4,8 +4,10 @@ import {
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
 } from "@/redux/api/categoryApi";
+import { getUserInfo } from "@/services/auth.service";
 import { ICategory, IMeta } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
@@ -13,6 +15,7 @@ import { toast } from "react-toastify";
 const CategoriesTable = () => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
+  const { role } = getUserInfo() as any;
 
   query["page"] = currentPage.toString();
 
@@ -84,10 +87,14 @@ const CategoriesTable = () => {
                 </td>
                 <td className="py-2 px-4 border-b text-center">
                   <div className="flex gap-6 items-center justify-center">
-                    <ImPencil
-                      className="text-blue-400 cursor-pointer"
-                      size={28}
-                    />
+                    <Link
+                      href={`/dashboard/${role}/categories/${category?._id}`}
+                    >
+                      <ImPencil
+                        className="text-blue-400 cursor-pointer"
+                        size={28}
+                      />
+                    </Link>
                     <ImBin
                       onClick={() => handleDeleteCategory(category?._id)}
                       className="text-red-500 cursor-pointer"

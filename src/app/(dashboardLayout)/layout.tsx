@@ -34,8 +34,8 @@ export default function RootLayout({
             <div className="w-full">{children}</div>
           </div>
           <div id="portal-root" />
-          <div className="sticky bottom-0 ">
-            <MobileLayout />
+          <div className="sticky bottom-0 z-30">
+            <MobileLayout dashboard={true} />
           </div>
           <ToastContainer />
         </body>
