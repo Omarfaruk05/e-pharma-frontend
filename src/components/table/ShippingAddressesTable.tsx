@@ -10,10 +10,11 @@ import {
 import { IMeta, IShippingAddress } from "@/types";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
-const ShippingAddressesTable = () => {
+const ShippingAddressesTable = ({ searchTerm }: { searchTerm: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const query: Record<string, any> = {};
 
+  if (searchTerm) query["searchTerm"] = searchTerm;
   query["page"] = currentPage.toString();
   const { data, isLoading } = useGetShippingAddressesQuery({ ...query });
   const shippingAddresses: IShippingAddress[] = data?.shippingAddresses;
@@ -46,7 +47,7 @@ const ShippingAddressesTable = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

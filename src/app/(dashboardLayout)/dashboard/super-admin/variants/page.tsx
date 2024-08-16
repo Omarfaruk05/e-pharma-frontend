@@ -3,11 +3,15 @@
 import VariantsTable from "@/components/table/VariantsTable";
 import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
+import { useState } from "react";
 
 const VariantsPage = () => {
   const { role } = getUserInfo() as any;
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   const handleSearch = (event: any) => {
     event.preventDefault();
+    setSearchTerm(event.target.searchTerm.value);
   };
   return (
     <div className="m-4">
@@ -38,7 +42,7 @@ const VariantsPage = () => {
           </Link>
         </div>
       </div>
-      <VariantsTable />
+      <VariantsTable searchTerm={searchTerm} />
     </div>
   );
 };

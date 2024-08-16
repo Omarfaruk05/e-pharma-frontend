@@ -11,7 +11,7 @@ import { ImPencil, ImBin } from "react-icons/im";
 import { toast } from "react-toastify";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
-const OrdersTable = () => {
+const OrdersTable = ({ searchTerm }: { searchTerm: string }) => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
   const [userId, setUserId] = useState("");
@@ -25,7 +25,8 @@ const OrdersTable = () => {
     }
   }, [userId]);
 
-  query["userId"] = userId;
+  if (userId) query["userId"] = userId;
+  if (searchTerm) query["searchTerm"] = searchTerm;
   query["page"] = currentPage.toString();
   const { data, isLoading } = useGetOrdersQuery({ ...query });
   const orders: IOrder[] = data?.orders;
@@ -39,7 +40,7 @@ const OrdersTable = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

@@ -14,7 +14,7 @@ const HomeProducts = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="grid place-items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

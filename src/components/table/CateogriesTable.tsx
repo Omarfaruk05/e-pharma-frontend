@@ -13,11 +13,12 @@ import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
-const CategoriesTable = () => {
+const CategoriesTable = ({ searchTerm }: { searchTerm: string }) => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
   const { role } = getUserInfo() as any;
 
+  if (searchTerm) query["searchTerm"] = searchTerm;
   query["page"] = currentPage.toString();
 
   const { data, isLoading } = useGetCategoriesQuery({ ...query });
@@ -52,7 +53,7 @@ const CategoriesTable = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

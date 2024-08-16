@@ -13,10 +13,10 @@ import Link from "next/link";
 import { getUserInfo } from "@/services/auth.service";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
-const ProductsTable = () => {
+const ProductsTable = ({ searchTerm }: { searchTerm: string }) => {
   const query: Record<string, any> = {};
   const [currentPage, setCurrentPage] = useState(1);
-
+  if (searchTerm) query["searchTerm"] = searchTerm;
   const { role } = getUserInfo() as any;
 
   query["page"] = currentPage.toString();
@@ -52,7 +52,7 @@ const ProductsTable = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

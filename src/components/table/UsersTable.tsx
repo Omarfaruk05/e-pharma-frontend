@@ -7,10 +7,17 @@ import { useGetUsersQuery, useDeleteUserMutation } from "@/redux/api/userApi";
 import { IUser, IMeta } from "@/types";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
-const UsersTable = ({ role }: { role: string }) => {
+const UsersTable = ({
+  role,
+  searchTerm,
+}: {
+  role: string;
+  searchTerm: string;
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const query: Record<string, any> = {};
 
+  if (searchTerm) query["searchTerm"] = searchTerm;
   query["page"] = currentPage.toString();
   query["role"] = role;
   const { data, isLoading } = useGetUsersQuery({ ...query });
@@ -44,7 +51,7 @@ const UsersTable = ({ role }: { role: string }) => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>

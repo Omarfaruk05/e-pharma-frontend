@@ -2,12 +2,14 @@
 import CategoriesTable from "@/components/table/CateogriesTable";
 import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
-import { BiSearch } from "react-icons/bi";
+import { useState } from "react";
 
 const CategoriesPage = () => {
   const { role } = getUserInfo() as any;
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const handleSearch = (event: any) => {
     event.preventDefault();
+    setSearchTerm(event.target.searchTerm.value);
   };
   return (
     <div className="m-4">
@@ -38,7 +40,7 @@ const CategoriesPage = () => {
           </Link>
         </div>
       </div>
-      <CategoriesTable />
+      <CategoriesTable searchTerm={searchTerm} />
     </div>
   );
 };

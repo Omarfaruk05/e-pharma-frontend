@@ -1,14 +1,14 @@
 "use client";
 
 import { useGetProductsQuery } from "@/redux/api/productApi";
-import { IMeta, IProduct } from "@/types";
+import { IProduct } from "@/types";
 import ProductCart from "./ProductCart";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
 const Products = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const searchParams = useSearchParams();
   const primaryId = searchParams.get("primaryId");
   const searchTerm = searchParams.get("searchTerm");
@@ -37,7 +37,7 @@ const Products = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center">
         <div className="w-fit">
           <ProcessingBtn />
         </div>
@@ -55,10 +55,11 @@ const Products = () => {
 
   return (
     <div>
-      <div className="  grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
-        {products.map((product: IProduct, index: number) => (
-          <ProductCart product={product} key={product._id || index} />
-        ))}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
+        {products?.length &&
+          products.map((product: IProduct, index: number) => (
+            <ProductCart product={product} key={product._id || index} />
+          ))}
       </div>
       {/* pagination  */}
       <div className="flex justify-center gap-3 items-center mt-4">

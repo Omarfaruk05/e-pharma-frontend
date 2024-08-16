@@ -17,7 +17,7 @@ const MobileLayout = ({ dashboard }: any) => {
   };
 
   return (
-    <div className="w-full bg-gray-100 py-4">
+    <div className="w-full bg-gray-100 md:bg-transparent py-4">
       <div className="mx-4">
         <MobileNav toggleSidebar={toggleSidebar} />
       </div>
