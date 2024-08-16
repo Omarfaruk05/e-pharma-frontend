@@ -33,14 +33,14 @@ const VariantDropdown = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 z-20  mt-2 min-w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-0 z-30  mt-2 min-w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {variants &&
               variants?.map((variant: IVariant, index: number) => (
                 <p
                   onClick={() => handleVariants(variant?.price, variant?._id)}
                   key={index}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className=" cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   {variant?.variant}
                 </p>

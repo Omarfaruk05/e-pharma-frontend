@@ -27,8 +27,12 @@ const ShoppingItems = ({
             {cart.reduce(
               (total: any, item: any) =>
                 total +
-                calculateAvailablePrice(item.price, item.discount) *
-                  item.quantity,
+                Number(
+                  (
+                    calculateAvailablePrice(item.price, item.discount) *
+                    item.quantity
+                  ).toFixed(2)
+                ),
               0
             )}{" "}
             TK

@@ -1,22 +1,54 @@
 "use client";
 
 import ProcessingBtn from "@/components/loading/ProcessingBtn";
-import { useGetSingleProductQuery } from "@/redux/api/productApi";
+import {
+  useGetProductsQuery,
+  useGetSingleProductQuery,
+} from "@/redux/api/productApi";
 import { IProduct } from "@/types";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import productImg from "../../../../assects/product.webp";
 import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
 import VariantDropdown from "@/components/ui/VariantDropdown";
+import { addToCart } from "@/redux/slice/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import ShoppingModal from "@/components/Modal/ShoppingModal";
+import PieceDropdown from "@/components/ui/PieceDropdown";
+import ProductCart from "@/components/ui/ProductCart";
+import { FaRegRectangleList } from "react-icons/fa6";
+import { TbListDetails } from "react-icons/tb";
 
 const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
   const id: string = params?.id;
+  const dispatch = useDispatch();
 
   const { data, isLoading } = useGetSingleProductQuery(id);
   const product: IProduct = data;
+
+  const { cart } = useSelector((state: any) => state?.cart);
+
+  const { data: productsData, isLoading: productsLoading } =
+    useGetProductsQuery({
+      primaryId: product?.categories?.primary?._id,
+    });
+
+  const products = productsData?.products.slice(0, 6);
   const [price, setPrice] = useState(product?.price);
   const [variant, setVariant] = useState(product?.variants[0]._id);
-  console.log(product);
+  const [quantity, setQuantity] = useState(1);
+  const [viewCart, setViewCart] = useState(false);
+  const [isShoppingModalOpen, setShoppingModalOpen] = useState(false);
+
+  const openShoppingModal = () => setShoppingModalOpen(true);
+  const closeShoppingModal = () => setShoppingModalOpen(false);
+
+  useEffect(() => {
+    const isAlreadyExist = cart.find((x: any) => x._id === product?._id);
+    if (!isAlreadyExist) {
+      setViewCart(false);
+    }
+  }, [cart, product?._id]);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center">
@@ -33,8 +65,32 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
     setVariant(variant);
   };
 
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        product,
+        quantity,
+        variantId: product?.variants[0]?._id as string,
+      })
+    );
+    setViewCart(true);
+  };
+
+  const handlePiece = (piece: number) => {
+    setQuantity(piece);
+  };
+
   return (
-    <div>
+    <div className="m-4 space-y-6">
       <div className="flex flex-col md:flex-row gap-20 justify-center">
         <div>
           <Image
@@ -70,20 +126,77 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
           </div>
           <div className="flex gap-2 justify-between items-center bg-slate-100 p-2 rounded-lg">
             <h3 className="text-xl font-semibold">
-              ৳ {calculateAvailablePrice(price, product?.discount)}
+              ৳{" "}
+              {(
+                calculateAvailablePrice(price, product?.discount) * quantity
+              ).toFixed(2)}
             </h3>
-            <p className="text-gray-500 line-through">৳ {price}</p>
+            <p className="text-gray-500 line-through">
+              ৳ {(price * quantity).toFixed(2)}
+            </p>
             <p className="text-red-500 font-semibold">
               {product?.discount}% OFF
             </p>
           </div>
-          <div className="w-full">
+          <div className="flex gap-3 justify-between">
             <VariantDropdown
               variants={product?.variants}
               handlePrice={handlePrice}
               handleVariant={handleVariant}
             />
+            <button className="w-20 md:w-32 flex justify-between  items-center px-2 border rounded-md">
+              <span onClick={handleDecrease}>-</span> <span>{quantity}</span>{" "}
+              <span onClick={handleIncrease}>+</span>
+            </button>
           </div>
+          <div className="relative flex w-full">
+            <PieceDropdown handlePiece={handlePiece} />
+          </div>
+          <div>
+            {viewCart ? (
+              <div>
+                <button
+                  onClick={openShoppingModal}
+                  className="w-full font-semibold rounded-md bg-cyan-500 px-2 py-1 text-white"
+                >
+                  View Cart
+                </button>
+                <ShoppingModal
+                  isOpen={isShoppingModalOpen}
+                  close={closeShoppingModal}
+                />
+              </div>
+            ) : (
+              <button
+                onClick={handleAddToCart}
+                className="w-full font-semibold rounded-md bg-sky-500 px-2 py-1 text-white"
+              >
+                Add to Cart
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* discriptions  */}
+      <div>
+        <h3 className="text-2xl font-semibold flex gap-2 items-center my-4">
+          <TbListDetails />
+          <span>Descriptions</span>
+        </h3>
+        <p>{product?.description}</p>
+      </div>
+
+      {/* related products  */}
+      <div>
+        <h3 className="text-2xl font-semibold flex gap-2 items-center my-4">
+          <FaRegRectangleList />
+          <span>Alternatives</span>
+        </h3>
+        <div className="  grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
+          {products.map((product: IProduct, index: number) => (
+            <ProductCart product={product} key={product._id || index} />
+          ))}
         </div>
       </div>
     </div>

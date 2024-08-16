@@ -61,11 +61,11 @@ export interface IProduct extends Document {
   stockStatus: boolean;
   status: boolean;
   categories: {
-    primary: { name: string };
-    secondary: { name: string };
-    tertiary: { name: string };
+    primary: ICategory;
+    secondary: ICategory;
+    tertiary: ICategory;
   };
-  variants: any;
+  variants: IVariant[];
   quantity?: number;
 }
 export interface IShippingAddress {

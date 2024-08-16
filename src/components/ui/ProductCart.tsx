@@ -36,7 +36,7 @@ const ProductCart = ({ product }: { product: IProduct }) => {
     if (!isAlreadyExist) {
       setViewCart(false);
     }
-  }, [cart, product._id]); // Add dependencies here
+  }, [cart, product?._id]);
 
   return (
     <div className="p-4 bg-gray-100 rounded-lg space-y-3">
@@ -53,7 +53,9 @@ const ProductCart = ({ product }: { product: IProduct }) => {
 
       <h4 className="text-xl font-semibold">{product?.name}</h4>
       <div className="text-sm">
-        <h5 className="text-lime-500">{product?.description?.slice(0, 70)}.</h5>
+        <h5 className="text-lime-500">
+          {product?.description?.slice(0, 30)}...
+        </h5>
       </div>
 
       <div className="flex gap-2 justify-between items-center">
