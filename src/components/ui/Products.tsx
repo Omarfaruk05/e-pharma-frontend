@@ -5,6 +5,7 @@ import { IMeta, IProduct } from "@/types";
 import ProductCart from "./ProductCart";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,11 +36,21 @@ const Products = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   if (!products || products.length === 0) {
-    return <p>No products found.</p>;
+    return (
+      <h2 className="text-3xl font-bold text-gray-800 text-center mt-32">
+        No products found.
+      </h2>
+    );
   }
 
   return (

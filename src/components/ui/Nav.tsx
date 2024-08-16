@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AuthModal from "../Modal/AuthModal";
 import { CiUser } from "react-icons/ci";
 import { useRouter } from "next/navigation";
+import Input from "../form/Input";
 
 const Nav = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -51,7 +52,7 @@ const Nav = () => {
   }
 
   return (
-    <div className="bg-sky-400 sticky top-0 md:z-20">
+    <div className="bg-sky-400 sticky top-0 z-10 md:z-20">
       <MainContainer>
         <div className="p-4 flex flex-col md:flex-row justify-between gap-4 items-center text-white">
           <div className="flex justify-between">
@@ -62,14 +63,20 @@ const Nav = () => {
               E Pharma
             </Link>
           </div>
-          <div className="">
-            <form onSubmit={handleSearch} className="">
-              <input
+          <div className="mx-8">
+            <form onSubmit={handleSearch} className="flex">
+              <Input
                 type="text"
                 name="search"
                 id="search"
-                className="p-2 text-gray-800 focus:outline-none rounded-md w-96 md:w-60 lg:w-96 md:mx-24"
+                placeholder="Search here"
               />
+              <button
+                type="submit"
+                className="font-semibold bg-gray-50 my-1 px-2 rounded-md text-gray-700"
+              >
+                Search
+              </button>
             </form>
           </div>
           <div className="hidden md:flex  items-center gap-8">

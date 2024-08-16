@@ -17,8 +17,10 @@ const MobileLayout = ({ dashboard }: any) => {
   };
 
   return (
-    <div>
-      <MobileNav toggleSidebar={toggleSidebar} />
+    <div className="w-full bg-gray-100 py-4">
+      <div className="mx-4">
+        <MobileNav toggleSidebar={toggleSidebar} />
+      </div>
       {dashboard ? (
         <DashboardHamburger
           isOpen={isSidebarOpen}

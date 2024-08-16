@@ -35,7 +35,7 @@ const MobileNav = ({ toggleSidebar }: any) => {
   };
 
   return (
-    <div className="fixed bottom-0  w-full flex justify-between items-center p-2 bg-white md:hidden">
+    <div className="flex justify-between items-center md:hidden">
       <div onClick={toggleSidebar}>
         <CgMenuLeft size={32} />
       </div>

@@ -3,6 +3,7 @@
 import { useGetCategoriesQuery } from "@/redux/api/categoryApi";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const Sidebar = ({ closeSedebar }: any) => {
   const query: Record<string, any> = {};
@@ -12,7 +13,13 @@ const Sidebar = ({ closeSedebar }: any) => {
   const categories = data?.categories;
 
   if (categoryLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
   return (
     <div className=" w-full p-3 space-y-2 ">

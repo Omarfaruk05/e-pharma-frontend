@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 const HamburgerSidebar = ({ isOpen, closeSidebar }: any) => {
   return (
     <div
-      className={`fixed top-0 left-0 h-full bg-white z-50 transform text-black ${
+      className={`fixed top-0 left-0 h-full bg-white transform text-black ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out w-60`}
     >

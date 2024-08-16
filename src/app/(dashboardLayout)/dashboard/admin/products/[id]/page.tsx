@@ -9,6 +9,7 @@ import { ICategory, IVariant } from "@/types";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Input from "@/components/form/Input";
+import ProcessingBtn from "@/components/loading/ProcessingBtn";
 
 interface FormValues {
   name: string;
@@ -135,7 +136,13 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

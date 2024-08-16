@@ -3,6 +3,8 @@ import MainContainer from "../layout/MainContainer";
 import playStore from "../../assects/get-play-store-icon.webp";
 import payment from "../../assects/payment.png";
 import Image from "next/image";
+import { MdEmail, MdContactPhone } from "react-icons/md";
+import { FaAddressBook } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -32,19 +34,19 @@ const Footer = () => {
             </div>
           </div>
           <div className="md:col-span-3 space-y-12">
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row  gap-8">
               <div className="space-y-4">
                 <div>
-                  <p>logo</p>
+                  <MdEmail size={32} className="text-sky-400" />
                   <p>Email: support@epharma.health</p>
                 </div>
                 <div>
-                  <p>logo</p>
+                  <MdContactPhone size={32} className="text-sky-400" />
                   <p>Contact: 01567900262</p>
                 </div>
               </div>
               <div className="space-y-2">
-                <p>logo</p>
+                <FaAddressBook size={32} className="text-sky-400" />
                 <p>
                   Level: 3, Road: 14, Block: C 180/6, Abdullah Park, 23/C
                   Banasree Main Rd, Dhaka-1219

@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <Providers>
           <Nav />
           <MainContainer>
             <div className="flex gap-8 m-4 md:m-8">
@@ -39,12 +39,12 @@ export default function RootLayout({
           </MainContainer>
           <div id="portal-root" />
           <Footer />
-          <div className="sticky bottom-0 ">
+          <div className="fixed bottom-0 w-full z-30">
             <MobileLayout />
           </div>
           <ToastContainer />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

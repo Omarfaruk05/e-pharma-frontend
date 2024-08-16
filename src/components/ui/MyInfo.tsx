@@ -10,6 +10,7 @@ import { IUser } from "@/types";
 import Image from "next/image";
 import React from "react";
 import { PiFlagPennantFill, PiFlagPennantLight } from "react-icons/pi";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const MyInfo = ({ data }: { data: IUser }) => {
   const { data: userData, isLoading: userLoading } = useGetUsersQuery({
@@ -42,7 +43,13 @@ const MyInfo = ({ data }: { data: IUser }) => {
     shippingLoading ||
     orderLoading
   ) {
-    return <p>Loading ...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

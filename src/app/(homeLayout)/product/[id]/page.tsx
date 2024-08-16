@@ -33,6 +33,7 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
       primaryId: product?.categories?.primary?._id,
     });
 
+  console.log(product);
   const products = productsData?.products.slice(0, 6);
   const [price, setPrice] = useState(product?.price);
   const [variant, setVariant] = useState(product?.variants[0]._id);
@@ -101,7 +102,7 @@ const ProductDetailsPage = ({ params }: { params: { id: string } }) => {
             alt="product_image"
           />
         </div>
-        <div className="min-w-96 border-2 border-gray-200 p-4 rounded-lg space-y-4">
+        <div className="md:min-w-96 border-2 border-gray-200 p-4 rounded-lg space-y-4">
           <h2 className="text-3xl font-bold text-gray-800">{product?.name}</h2>
           <div>
             <p>

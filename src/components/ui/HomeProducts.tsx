@@ -4,6 +4,7 @@ import React from "react";
 import ProductCart from "./ProductCart";
 import { useGetProductsQuery } from "@/redux/api/productApi";
 import { IProduct } from "@/types";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const HomeProducts = () => {
   const query: Record<string, any> = {};
@@ -12,7 +13,13 @@ const HomeProducts = () => {
   const products: IProduct[] = data?.products;
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

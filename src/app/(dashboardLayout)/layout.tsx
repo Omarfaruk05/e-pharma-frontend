@@ -21,10 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      <html lang="en">
-        <body className={inter.className}>
-          <div className="sticky top-0 z-20">
+    <html lang="en">
+      <body className={inter.className}>
+        <Providers>
+          <div className="sticky top-0">
             <Nav />
           </div>
           <div className="flex">
@@ -34,12 +34,12 @@ export default function RootLayout({
             <div className="w-full">{children}</div>
           </div>
           <div id="portal-root" />
-          <div className="sticky bottom-0 z-30">
+          <div className="fixed bottom-0 w-full z-30">
             <MobileLayout dashboard={true} />
           </div>
           <ToastContainer />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

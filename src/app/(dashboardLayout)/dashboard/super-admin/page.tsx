@@ -1,5 +1,6 @@
 "use client";
 
+import ProcessingBtn from "@/components/loading/ProcessingBtn";
 import MyInfo from "@/components/ui/MyInfo";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/services/auth.service";
@@ -10,7 +11,13 @@ const SuperAdminPage = () => {
   const { data, isLoading } = useGetSingleUserQuery(_id);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
   return (
     <div className="w-fit md:w-full">
