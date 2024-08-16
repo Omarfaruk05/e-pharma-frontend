@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ImPencil, ImBin } from "react-icons/im";
 import { toast } from "react-toastify";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const OrdersTable = () => {
   const query: Record<string, any> = {};
@@ -37,7 +38,13 @@ const OrdersTable = () => {
   }, [userRole]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   const handlePrevious = () => {

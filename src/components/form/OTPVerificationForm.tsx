@@ -11,6 +11,7 @@ const OTPVerificationForm = ({
   isLogedIn: () => void;
   isSignup: () => void;
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formValues, setFormValues] = useState({
     otp: "",
   });
@@ -27,7 +28,8 @@ const OTPVerificationForm = ({
     });
   };
 
-  const handleLogin = async (event: any) => {
+  const handleVerifyOTP = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     const { otp } = formValues;
     otp.toString();
@@ -36,17 +38,19 @@ const OTPVerificationForm = ({
       const res = await verifyOTP(data).unwrap();
 
       if (res?._id) {
+        setIsLoading(false);
         toast.success("OTP verificaton Successfull.");
         isLogedIn();
         isSignup();
       }
     } catch (error: any) {
+      setIsLoading(false);
       toast.error(error);
     }
   };
   return (
     <div>
-      <form onSubmit={handleLogin} className="text-black space-y-4">
+      <form onSubmit={handleVerifyOTP} className="text-black space-y-4">
         <p className="text-sm  text-center my-1 text-white">
           Please check mail inbox for otp.
         </p>

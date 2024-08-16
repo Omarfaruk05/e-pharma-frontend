@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import Input from "./Input";
-import { useRouter } from "next/router";
 import { useAddUserMutation } from "@/redux/api/userApi";
 import { storeUserId } from "@/services/auth.service";
 import { toast } from "react-toastify";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -30,6 +31,7 @@ const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
   const disabled = isPasswordMatched;
 
   const handleSignup = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     const { name, email, password } = formValues;
     console.log(name, email, password);
@@ -39,11 +41,13 @@ const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
       const res = await addUser(user).unwrap();
 
       if (res?.userId) {
+        setIsLoading(false);
         await storeUserId({ userId: res?.userId });
         toast.success("Signup successfull.");
         isSignup();
       }
     } catch (error: any) {
+      setIsLoading(false);
       toast.error(error);
     }
   };
@@ -88,12 +92,17 @@ const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
             Password and confirm password is not matched.
           </small>
         )}
-        <input
-          {...({ disabled } as any)}
-          className=" bg-sky-800 text-white w-full p-2 rounded-md"
-          type="submit"
-          value={"Signup"}
-        />
+
+        {isLoading ? (
+          <ProcessingBtn />
+        ) : (
+          <input
+            {...({ disabled } as any)}
+            className=" bg-sky-800 text-white w-full p-2 rounded-md"
+            type="submit"
+            value={"Signup"}
+          />
+        )}
       </form>
     </div>
   );

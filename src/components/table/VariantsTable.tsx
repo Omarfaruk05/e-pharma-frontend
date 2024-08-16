@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const VariantsTable = () => {
   const query: Record<string, any> = {};
@@ -47,7 +48,13 @@ const VariantsTable = () => {
   };
 
   if (isLoading) {
-    return <p>Loading... </p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

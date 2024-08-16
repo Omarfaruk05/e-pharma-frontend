@@ -5,6 +5,7 @@ import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
 import { useGetUsersQuery, useDeleteUserMutation } from "@/redux/api/userApi";
 import { IUser, IMeta } from "@/types";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const UsersTable = ({ role }: { role: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +43,13 @@ const UsersTable = ({ role }: { role: string }) => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -87,7 +94,7 @@ const UsersTable = ({ role }: { role: string }) => {
           ))}
         </tbody>
       </table>
-
+      {/* pagination  */}
       <div className="flex justify-between items-center mt-4">
         <button
           onClick={handlePrevious}

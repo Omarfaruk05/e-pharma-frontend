@@ -8,6 +8,7 @@ import {
   useDeleteShippingAddressMutation,
 } from "@/redux/api/shippingAddressApi";
 import { IMeta, IShippingAddress } from "@/types";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const ShippingAddressesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +45,13 @@ const ShippingAddressesTable = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

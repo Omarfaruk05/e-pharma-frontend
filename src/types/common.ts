@@ -61,9 +61,9 @@ export interface IProduct extends Document {
   stockStatus: boolean;
   status: boolean;
   categories: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
+    primary: { name: string };
+    secondary: { name: string };
+    tertiary: { name: string };
   };
   variants: any;
   quantity?: number;

@@ -21,7 +21,7 @@ const VariantDropdown = ({
     handleVariant(id);
   };
   return (
-    <div className=" inline-block text-left bg-white">
+    <div className="relative inline-block text-left bg-white">
       {/* Button */}
       <button
         onClick={toggleDropdown}

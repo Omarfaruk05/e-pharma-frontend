@@ -8,6 +8,7 @@ import { IProduct } from "@/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/slice/cartSlice";
 import ShoppingModal from "../Modal/ShoppingModal";
+import Link from "next/link";
 
 const ProductCart = ({ product }: { product: IProduct }) => {
   const [viewCart, setViewCart] = useState(false);
@@ -40,12 +41,14 @@ const ProductCart = ({ product }: { product: IProduct }) => {
   return (
     <div className="p-4 bg-gray-100 rounded-lg space-y-3">
       <div>
-        <Image
-          className="w-full rounded-xl"
-          src={productImg}
-          width={200}
-          alt="product-image"
-        />
+        <Link href={`/product/${product?._id}`}>
+          <Image
+            className="w-full rounded-xl"
+            src={productImg}
+            width={200}
+            alt="product-image"
+          />
+        </Link>
       </div>
 
       <h4 className="text-xl font-semibold">{product?.name}</h4>

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ImBin, ImPencil } from "react-icons/im";
 import { toast } from "react-toastify";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const CategoriesTable = () => {
   const query: Record<string, any> = {};
@@ -50,7 +51,13 @@ const CategoriesTable = () => {
   };
 
   if (isLoading) {
-    return <p>Loading... </p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (

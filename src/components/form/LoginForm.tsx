@@ -6,8 +6,10 @@ import { storeUserInfo } from "@/services/auth.service";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/redux/slice/userSlice";
 import { toast } from "react-toastify";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const LoginForm = ({ close }: { close: () => void }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -24,6 +26,7 @@ const LoginForm = ({ close }: { close: () => void }) => {
   };
 
   const handleLogin = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     const { email, password } = formValues;
     const user = { email, password };
@@ -32,12 +35,14 @@ const LoginForm = ({ close }: { close: () => void }) => {
       const res = await login(user).unwrap();
 
       if (res?.accessToken) {
+        setIsLoading(false);
         await storeUserInfo({ accessToken: res?.accessToken });
         toast.success("Login successfull.");
         dispatch(loginSuccess());
         close();
       }
     } catch (error: any) {
+      setIsLoading(false);
       toast.error(error);
     }
   };
@@ -63,11 +68,15 @@ const LoginForm = ({ close }: { close: () => void }) => {
           onChange={handleChange}
         />
 
-        <input
-          className=" bg-sky-800 text-white w-full p-2 rounded-md"
-          type="submit"
-          value={"Login"}
-        />
+        {isLoading ? (
+          <ProcessingBtn />
+        ) : (
+          <input
+            className=" bg-sky-800 text-white w-full p-2 rounded-md"
+            type="submit"
+            value={"Login"}
+          />
+        )}
       </form>
     </div>
   );

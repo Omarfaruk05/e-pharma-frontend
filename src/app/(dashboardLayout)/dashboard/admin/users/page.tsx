@@ -7,7 +7,7 @@ import React from "react";
 const AllUsers = () => {
   return (
     <div className="p-4">
-      <UsersTable />
+      <UsersTable role="user" />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import {
 } from "@/redux/api/productApi";
 import Link from "next/link";
 import { getUserInfo } from "@/services/auth.service";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const ProductsTable = () => {
   const query: Record<string, any> = {};
@@ -50,7 +51,13 @@ const ProductsTable = () => {
   };
 
   if (isLoading) {
-    return <p>Loading... </p>;
+    return (
+      <div className="flex justify-center items-center w-screen">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
   }
 
   return (
