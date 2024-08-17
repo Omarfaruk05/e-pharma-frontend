@@ -94,7 +94,7 @@ const ProductDetails = ({ id }: { id: string }) => {
         <div>
           <Image
             className="w-full rounded-lg"
-            src={productImg}
+            src={product?.photos[0]}
             width={700}
             height={300}
             alt="product_image"

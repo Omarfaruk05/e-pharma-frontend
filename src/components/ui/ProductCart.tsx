@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import productImg from "../../assects/product.webp";
 import { calculateAvailablePrice } from "@/utils/calfulateAvailablePrice";
 import { useEffect, useState } from "react";
 import { IProduct } from "@/types";
@@ -44,7 +43,7 @@ const ProductCart = ({ product }: { product: IProduct }) => {
         <Link href={`/product/${product?._id}`}>
           <Image
             className="w-full rounded-xl"
-            src={productImg}
+            src={product?.photos[0]}
             width={200}
             alt="product-image"
           />
