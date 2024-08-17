@@ -45,6 +45,7 @@ const ProductCart = ({ product }: { product: IProduct }) => {
             className="w-full rounded-xl"
             src={product?.photos[0]}
             width={200}
+            height={150}
             alt="product-image"
           />
         </Link>
@@ -56,13 +57,28 @@ const ProductCart = ({ product }: { product: IProduct }) => {
           {product?.description?.slice(0, 30)}...
         </h5>
       </div>
-
+      {/* status  */}
+      <div className="flex gap-2">
+        <button className="py-1 px-2 bg-purple-200 text-xs rounded-xl text-gray-700">
+          {product?.stockStatus ? "In stock" : "Out of stock"}
+        </button>
+        <button className="py-1 px-2 bg-purple-200 text-xs rounded-xl text-gray-700">
+          {product?.status ? "Active" : "Inactive"}
+        </button>
+      </div>
+      {/* prices  */}
       <div className="flex gap-2 justify-between items-center">
         <h3 className="text-xl font-semibold">
-          ৳ {calculateAvailablePrice(product?.price, product?.discount)}
+          ৳{" "}
+          {product?.price &&
+            calculateAvailablePrice(product?.price, product?.discount)}
         </h3>
-        <p className="text-gray-500 line-through">৳ {product?.price}</p>
-        <p className="text-red-500 font-semibold">{product?.discount}% OFF</p>
+        <p className="text-gray-500 line-through">
+          ৳ {product?.price && product?.price}
+        </p>
+        <p className="text-red-500 font-semibold">
+          {product?.price && product?.discount}% OFF
+        </p>
       </div>
       <div>
         {viewCart ? (

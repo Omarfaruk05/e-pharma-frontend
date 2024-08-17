@@ -21,26 +21,19 @@ import { TbListDetails } from "react-icons/tb";
 
 const ProductDetails = ({ id }: { id: string }) => {
   const dispatch = useDispatch();
-
-  const { data, isLoading } = useGetSingleProductQuery(id);
-  const product: IProduct = data;
-
-  const { cart } = useSelector((state: any) => state?.cart);
-
-  const { data: productsData, isLoading: productsLoading } =
-    useGetProductsQuery({
-      primaryId: product?.categories?.primary?._id,
-    });
-
-  const products = productsData?.products.slice(0, 6);
-  const [price, setPrice] = useState(product?.price);
-  const [variant, setVariant] = useState(product?.variants[0]._id);
+  const [price, setPrice] = useState<number>(1);
+  const [variant, setVariant] = useState<string>();
   const [quantity, setQuantity] = useState(1);
   const [viewCart, setViewCart] = useState(false);
   const [isShoppingModalOpen, setShoppingModalOpen] = useState(false);
 
-  const openShoppingModal = () => setShoppingModalOpen(true);
-  const closeShoppingModal = () => setShoppingModalOpen(false);
+  const { cart } = useSelector((state: any) => state?.cart);
+  const { data, isLoading } = useGetSingleProductQuery(id);
+  const product: IProduct = data;
+  const { data: productsData } = useGetProductsQuery({
+    primaryId: product?.categories?.primary?._id,
+  });
+  const products = productsData?.products.slice(0, 6);
 
   useEffect(() => {
     const isAlreadyExist = cart.find((x: any) => x._id === product?._id);
@@ -48,15 +41,16 @@ const ProductDetails = ({ id }: { id: string }) => {
       setViewCart(false);
     }
   }, [cart, product?._id]);
-  if (isLoading) {
-    return (
-      <div className="grid place-items-center">
-        <div className="w-fit">
-          <ProcessingBtn />
-        </div>
-      </div>
-    );
-  }
+
+  useEffect(() => {
+    if (product) {
+      setPrice(product?.price);
+    }
+  }, [product]);
+
+  const openShoppingModal = () => setShoppingModalOpen(true);
+  const closeShoppingModal = () => setShoppingModalOpen(false);
+
   const handlePrice = (price: number) => {
     setPrice(price);
   };
@@ -87,6 +81,16 @@ const ProductDetails = ({ id }: { id: string }) => {
   const handlePiece = (piece: number) => {
     setQuantity(piece);
   };
+
+  if (isLoading) {
+    return (
+      <div className="grid place-items-center">
+        <div className="w-fit">
+          <ProcessingBtn />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="m-4 space-y-6">
@@ -122,19 +126,32 @@ const ProductDetails = ({ id }: { id: string }) => {
                 {product?.categories?.tertiary?.name}
               </span>
             </p>
+            <p>
+              Stock Status:{" "}
+              <span className="text-purple-500 font-semibold">
+                {product?.stockStatus ? "In stock" : "Out of stock"}
+              </span>
+            </p>
+            <p>
+              Active Status:{" "}
+              <span className="text-purple-500 font-semibold">
+                {product?.status ? "Active" : "Inactive"}
+              </span>
+            </p>
           </div>
           <div className="flex gap-2 justify-between items-center bg-slate-100 p-2 rounded-lg">
             <h3 className="text-xl font-semibold">
               ৳{" "}
-              {(
-                calculateAvailablePrice(price, product?.discount) * quantity
-              ).toFixed(2)}
+              {product?.price &&
+                (
+                  calculateAvailablePrice(price, product?.discount) * quantity
+                ).toFixed(2)}
             </h3>
             <p className="text-gray-500 line-through">
-              ৳ {(price * quantity).toFixed(2)}
+              ৳ {product?.price && (price * quantity).toFixed(2)}
             </p>
             <p className="text-red-500 font-semibold">
-              {product?.discount}% OFF
+              {product?.price && product?.discount}% OFF
             </p>
           </div>
           <div className="flex gap-3 justify-between">

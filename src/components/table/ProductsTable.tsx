@@ -24,6 +24,8 @@ const ProductsTable = ({ searchTerm }: { searchTerm: string }) => {
   const products: IProduct[] = data?.products;
   const meta = data?.meta;
 
+  console.log(products);
+
   const [deleteProduct] = useDeleteProductMutation();
 
   const handlePrevious = () => {
