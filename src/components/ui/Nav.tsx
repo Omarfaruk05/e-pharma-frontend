@@ -52,7 +52,7 @@ const Nav = () => {
   }
 
   return (
-    <div className="bg-sky-400 sticky top-0 z-10 md:z-20">
+    <div className="bg-sky-400 sticky top-0 z-20 ">
       <MainContainer>
         <div className="p-4 flex flex-col md:flex-row justify-between gap-4 items-center text-white">
           <div className="flex justify-between">

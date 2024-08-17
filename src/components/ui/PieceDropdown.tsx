@@ -22,7 +22,7 @@ const PieceDropdown = ({ handlePiece }: { handlePiece: any }) => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 z-20  mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-0  mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <p
               onClick={() => handlePiece(10)}

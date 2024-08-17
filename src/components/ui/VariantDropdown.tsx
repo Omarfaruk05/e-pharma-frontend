@@ -33,7 +33,7 @@ const VariantDropdown = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0  mt-2 min-w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-0 z-10 mt-2 min-w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {variants &&
               variants?.map((variant: IVariant, index: number) => (
