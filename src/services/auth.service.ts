@@ -56,7 +56,7 @@ export const removeUserInfo = (key: string) => {
 export const getNewAccessToken = async () => {
   console.log("dfsadf");
   return await axiosInstance({
-    url: `http://localhost:5000/api/v1/auth/refresh-token`,
+    url: `https://e-pharma-backend.vercel.app/api/v1/auth/refresh-token`,
     method: "POST",
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
