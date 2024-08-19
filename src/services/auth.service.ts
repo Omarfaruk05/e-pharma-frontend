@@ -1,13 +1,16 @@
-import { AUTH_KEY, USER_KEY } from "@/constants/storageKey";
+import { AUTH_KEY, EXPIRE_KEY, USER_KEY } from "@/constants/storageKey";
+import { instance as axiosInstance } from "@/helpers/axios/axiosInstance";
 import { decodedToken } from "@/utils/jwt";
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
-  console.log(accessToken);
   setToLocalStorage(AUTH_KEY, accessToken as string);
 };
 export const storeUserId = ({ userId }: { userId: string }) => {
   setToLocalStorage(USER_KEY, userId as string);
+};
+export const storeExpriedOTPTime = ({ expiresAt }: { expiresAt: string }) => {
+  setToLocalStorage(EXPIRE_KEY, expiresAt as string);
 };
 
 export const getUserInfo = () => {
@@ -30,6 +33,15 @@ export const getUserId = () => {
     return "";
   }
 };
+export const getOTPTime = () => {
+  const expiresAt = getFromLocalStorage(EXPIRE_KEY);
+
+  if (expiresAt) {
+    return expiresAt;
+  } else {
+    return "";
+  }
+};
 
 export const isLoggedIn = () => {
   const authToken = getFromLocalStorage(AUTH_KEY);
@@ -39,4 +51,14 @@ export const isLoggedIn = () => {
 
 export const removeUserInfo = (key: string) => {
   return localStorage.removeItem(key);
+};
+
+export const getNewAccessToken = async () => {
+  console.log("dfsadf");
+  return await axiosInstance({
+    url: `http://localhost:5000/api/v1/auth/refresh-token`,
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  });
 };

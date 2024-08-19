@@ -22,6 +22,14 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.otp],
     }),
+    resendOTP: build.mutation({
+      query: (data) => ({
+        url: `/otp/resendOTPVerification`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.otp],
+    }),
     login: build.mutation({
       query: (data) => ({
         url: `/auth/login`,
@@ -74,6 +82,7 @@ export const {
   useAddUserMutation,
   useVerifyOTPMutation,
   useLoginMutation,
+  useResendOTPMutation,
   useGetSingleUserQuery,
   useGetUsersQuery,
   useDeleteUserMutation,

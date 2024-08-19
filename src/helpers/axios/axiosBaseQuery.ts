@@ -29,6 +29,7 @@ export const axiosBaseQuery =
         headers: {
           "Content-Type": contentType || "application/json",
         },
+        withCredentials: true,
       });
       if (result?.errorMessages) {
         toast.error(`${result?.errorMessages}`);

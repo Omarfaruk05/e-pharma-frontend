@@ -30,7 +30,7 @@ const Products = () => {
   };
 
   const handleNext = () => {
-    if (currentPage < Math.ceil(meta.total / meta.limit)) {
+    if (currentPage < Math.ceil(meta?.total / meta?.limit)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -73,15 +73,15 @@ const Products = () => {
           Previous
         </button>
         <span>
-          Page {currentPage} of {Math.ceil(meta.total / meta.limit)}
+          Page {currentPage} of {Math.ceil(meta?.total / meta?.limit)}
         </span>
         <button
           onClick={handleNext}
           className={`px-4 py-2 bg-sky-400 text-white rounded ${
-            currentPage === Math.ceil(meta.total / meta.limit) &&
+            currentPage === Math.ceil(meta?.total / meta?.limit) &&
             "cursor-not-allowed opacity-50"
           }`}
-          disabled={currentPage === Math.ceil(meta.total / meta.limit)}
+          disabled={currentPage === Math.ceil(meta?.total / meta?.limit)}
         >
           Next
         </button>

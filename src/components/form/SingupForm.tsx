@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import { useAddUserMutation } from "@/redux/api/userApi";
-import { storeUserId } from "@/services/auth.service";
+import { storeExpriedOTPTime, storeUserId } from "@/services/auth.service";
 import { toast } from "react-toastify";
 import ProcessingBtn from "../loading/ProcessingBtn";
 
@@ -40,9 +40,11 @@ const SingupForm = ({ isSignup }: { isSignup: () => void }) => {
     try {
       const res = await addUser(user).unwrap();
 
+      setIsLoading(false);
+      console.log(res);
       if (res?.userId) {
-        setIsLoading(false);
         await storeUserId({ userId: res?.userId });
+        await storeExpriedOTPTime({ expiresAt: res?.expiresAt });
         toast.success("Signup successfull.");
         isSignup();
       }

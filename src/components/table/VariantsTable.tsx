@@ -32,7 +32,7 @@ const VariantsTable = ({ searchTerm }: { searchTerm: string }) => {
   };
 
   const handleNext = () => {
-    if (currentPage < Math.ceil(meta.total / meta.limit)) {
+    if (currentPage < Math.ceil(meta?.total / meta?.limit)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -77,14 +77,14 @@ const VariantsTable = ({ searchTerm }: { searchTerm: string }) => {
             variants?.map((variant: any) => (
               <tr key={variant._id}>
                 <td className="p-4 border-b">{variant.productName}</td>
-                <td className="p-4 border-b">{variant.variant}</td>
-                <td className="p-4 border-b">{variant.price}</td>
-                <td className="p-4 border-b">{variant.quantity}</td>
+                <td className="p-4 border-b text-center">{variant.variant}</td>
+                <td className="p-4 border-b text-center">{variant.price}</td>
+                <td className="p-4 border-b text-center">{variant.quantity}</td>
 
-                <td className="p-4 border-b">
+                <td className="p-4 border-b text-center">
                   {new Date(variant.createdAt).toLocaleDateString()}
                 </td>
-                <td className="p-4 border-b">
+                <td className="p-4 border-b text-center">
                   {new Date(variant.updatedAt).toLocaleDateString()}
                 </td>
                 <td className="p-4 border-b text-center">
@@ -118,15 +118,15 @@ const VariantsTable = ({ searchTerm }: { searchTerm: string }) => {
           Previous
         </button>
         <span>
-          Page {currentPage} of {Math.ceil(meta.total / meta.limit)}
+          Page {currentPage} of {Math.ceil(meta?.total / meta?.limit)}
         </span>
         <button
           onClick={handleNext}
           className={`px-4 py-2 bg-sky-400 text-white rounded ${
-            currentPage === Math.ceil(meta.total / meta.limit) &&
+            currentPage === Math.ceil(meta?.total / meta?.limit) &&
             "cursor-not-allowed opacity-50"
           }`}
-          disabled={currentPage === Math.ceil(meta.total / meta.limit)}
+          disabled={currentPage === Math.ceil(meta?.total / meta?.limit)}
         >
           Next
         </button>

@@ -34,8 +34,8 @@ const LoginForm = ({ close }: { close: () => void }) => {
     try {
       const res = await login(user).unwrap();
 
+      setIsLoading(false);
       if (res?.accessToken) {
-        setIsLoading(false);
         await storeUserInfo({ accessToken: res?.accessToken });
         toast.success("Login successfull.");
         dispatch(loginSuccess());

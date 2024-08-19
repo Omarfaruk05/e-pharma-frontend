@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import { useVerifyOTPMutation } from "@/redux/api/userApi";
-import { getUserId, storeUserInfo } from "@/services/auth.service";
+import { getOTPTime, getUserId, storeUserInfo } from "@/services/auth.service";
 import { toast } from "react-toastify";
+import ResendOTP from "../ui/ResendOTP";
+import ProcessingBtn from "../loading/ProcessingBtn";
 
 const OTPVerificationForm = ({
   isLogedIn,
@@ -12,6 +14,7 @@ const OTPVerificationForm = ({
   isSignup: () => void;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [formValues, setFormValues] = useState({
     otp: "",
   });
@@ -37,8 +40,8 @@ const OTPVerificationForm = ({
     try {
       const res = await verifyOTP(data).unwrap();
 
+      setIsLoading(false);
       if (res?._id) {
-        setIsLoading(false);
         toast.success("OTP verificaton Successfull.");
         isLogedIn();
         isSignup();
@@ -63,12 +66,17 @@ const OTPVerificationForm = ({
           onChange={handleChange}
         />
 
-        <input
-          className=" bg-sky-800 text-white w-full p-2 rounded-md"
-          type="submit"
-          value={"Verify OTP"}
-        />
+        {isLoading ? (
+          <ProcessingBtn />
+        ) : (
+          <input
+            className=" bg-sky-800 text-white w-full p-2 rounded-md cursor-pointer"
+            type="submit"
+            value={"Verify OTP"}
+          />
+        )}
       </form>
+      <ResendOTP />
     </div>
   );
 };
